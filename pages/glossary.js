@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const glossary = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const Glossary = () => {
+  return <div></div>;
+};
 
-export default glossary
+export default Glossary;
