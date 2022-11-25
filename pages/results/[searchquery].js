@@ -1,6 +1,6 @@
 import React from 'react'
 
-const [searchquery] = () => {
+const Results = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const [searchquery] = () => {
   )
 }
 
-export default [searchquery]
+export default Results
