@@ -15,10 +15,9 @@ import {
 const db = getFirestore(app);
 
 // Add a new document in collection "users"
-await setDoc(doc(db, "users", "3"), {
-  name: "Patrick",
-});
-
-export { db };
-
-console.log("A");
+async function addNewUser() {
+  await setDoc(doc(db, "users", "3"), {
+    name: "Patrick",
+  });
+}
+export { db, addNewUser };
