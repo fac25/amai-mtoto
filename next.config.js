@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
 };
 
-import * as dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 
-export default nextConfig;
+module.exports = nextConfig;
