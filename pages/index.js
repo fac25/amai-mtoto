@@ -2,9 +2,7 @@
 import styles from "../styles/Home.module.css";
 import Video from "../components/Video";
 
-// import Media from "../components/Media";
-
-import YouTube from "react-youtube";
+import Media from "../components/Media";
 
 export default function Home() {
   return (
@@ -13,14 +11,15 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        <Video />;
-        {/* 
+
         <Media
-        // mediaType="video"
-        // mediaSrc="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-        // mediaType="image"
-        // mediaSrc="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-        /> */}
+          // mediaType="video"
+          // mediaSrc="vWXrFetSH8w"
+          height="400"
+          width="600"
+          mediaType="image"
+          mediaSrc="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+        />
       </main>
 
       <footer></footer>
