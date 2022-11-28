@@ -76,13 +76,7 @@ async function getArticlesByTrimester(trimesterNum) {
 
 async function updateArticle(
   articleId,
-  author,
-  content,
-  title,
-  trimesterRelated,
-  topic,
-  resources,
-  media
+  { author, content, title, trimesterRelated, topic, resources, media }
 ) {
   const articleRef = doc(db, "articles", articleId);
   author && (await updateDoc(articleRef, { author }));
@@ -114,7 +108,7 @@ async function getBabySizeByWeek(weekNum) {
   return week.data();
 }
 
-async function updateBabySize(weekNum, description, imgSrc, alt, weight) {
+async function updateBabySize(weekNum, { description, imgSrc, alt, weight }) {
   const babySizeRef = doc(db, "babySize", weekNum);
   description && (await updateDoc(babySizeRef, { description }));
   imgSrc && (await updateDoc(babySizeRef, { imgSrc }));
@@ -145,7 +139,7 @@ async function getAllFAQs() {
   return faqs;
 }
 
-async function updateFAQ(faqId, question, answer) {
+async function updateFAQ(faqId, { question, answer }) {
   const faqRef = doc(db, "FAQs", faqId);
   question && (await updateDoc(faqRef, { question }));
   answer && (await updateDoc(faqRef, { answer }));
