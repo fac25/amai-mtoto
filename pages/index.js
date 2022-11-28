@@ -1,9 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { addNewUser } from "../firebase/firestore";
 
 export async function getServerSideProps() {
-  await addNewUser();
   return {
     props: {},
   };
