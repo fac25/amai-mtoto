@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import BabyProgress from "../components/BabyProgress";
+import Nav from "../components/Nav";
 
 const HomePage = () => {
   return (
     <div>
-      
-    </div>
-  )
-}
+      <Nav />
 
-export default HomePage
+      <BabyProgress />
+    </div>
+  );
+};
+
+export default HomePage;

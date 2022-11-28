@@ -1,15 +1,7 @@
 import React from "react";
-import Media from "../../components/Media";
+import Media from "./Media";
 
-export async function getServerSideProps({ params }) {
-  return {
-    props: {
-      id: params.id,
-    },
-  };
-}
-
-const Article = () => {
+const Logo = () => {
   return (
     <div>
       <Media
@@ -24,4 +16,4 @@ const Article = () => {
   );
 };
 
-export default Article;
+export default Logo;
