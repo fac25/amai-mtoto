@@ -64,7 +64,7 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: 'Trimester 2',
+    label: 'Trimester 3',
     children: [
       {
         label: 'Exercise',
@@ -85,7 +85,6 @@ const NAV_ITEMS = [
   },
  
 ];
-
 
 export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
