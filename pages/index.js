@@ -2,6 +2,7 @@
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import Logo from "../components/Logo";
+import Footer from "../components/Footer";
 
 export async function getServerSideProps() {
   return {
@@ -17,10 +18,7 @@ export default function Home() {
           Hello to <a href="https://nextjs.org">Next.js!</a>
         </h1>
       </main>
-
-      <footer>
-        <Logo />
-      </footer>
+      <Footer></Footer>
     </div>
   );
 }
