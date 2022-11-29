@@ -17,10 +17,6 @@ export default function Home() {
           Hello to <a href="https://nextjs.org">Next.js!</a>
         </h1>
       </main>
-      <Form
-        formElements={formElements}
-        formSubmitFunction={formSubmitFunction}
-      />
       <footer></footer>
     </div>
   );
