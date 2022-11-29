@@ -1,5 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import {
+  FormErrorMessage,
+  FormLabel,
+  FormControl,
+  Input,
+  Button,
+} from "@chakra-ui/react";
 const Form = ({ formElements, formSubmitFunction }) => {
   const {
     handleSubmit,
@@ -14,8 +21,8 @@ const Form = ({ formElements, formSubmitFunction }) => {
       {formElements.map((element, i) => {
         return (
           <div key={i}>
-            <label htmlFor={element.label}>{element.label}:</label>
-            <input
+            <FormLabel htmlFor={element.label}>{element.label}:</FormLabel>
+            <Input
               type={element.type}
               id={element.label}
               {...register(`${element.label}`, {
@@ -26,11 +33,15 @@ const Form = ({ formElements, formSubmitFunction }) => {
                 },
               })}
             />
-            {errors[element.label] && errors[element.label].message}
+            <FormErrorMessage>
+              {errors[element.label] && errors[element.label].message}
+            </FormErrorMessage>
           </div>
         );
       })}
-      <button type="submit">Submit</button>
+      <Button colorScheme="teal" type="submit">
+        Submit
+      </Button>
     </form>
   );
 };

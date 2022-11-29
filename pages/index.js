@@ -1,8 +1,11 @@
 // import Head from "next/head";
 import styles from "../styles/Home.module.css";
-
 import Head from "next/head";
+
 import Form from "../components/Form";
+
+import Footer from "../components/Footer";
+
 export async function getServerSideProps() {
   return {
     props: {},
@@ -42,7 +45,7 @@ export default function Home() {
         formElements={formElements}
         formSubmitFunction={formSubmitFunction}
       />
-      <footer></footer>
+      <Footer></Footer>
     </div>
   );
 }
