@@ -1,7 +1,7 @@
 // import Head from "next/head";
 import styles from "../styles/Home.module.css";
-
 import Head from "next/head";
+import Logo from "../components/Logo";
 
 export async function getServerSideProps() {
   return {
@@ -18,7 +18,9 @@ export default function Home() {
         </h1>
       </main>
 
-      <footer></footer>
+      <footer>
+        <Logo />
+      </footer>
     </div>
   );
 }
