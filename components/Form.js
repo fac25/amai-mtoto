@@ -33,9 +33,7 @@ const Form = ({ formElements, formSubmitFunction }) => {
                 },
               })}
             />
-            <FormErrorMessage>
-              {errors[element.label] && errors[element.label].message}
-            </FormErrorMessage>
+            {errors[element.label] && errors[element.label].message}
           </div>
         );
       })}
