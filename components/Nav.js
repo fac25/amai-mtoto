@@ -21,6 +21,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import Logo from "./Logo";
 
 const trimesterItems = createTrimesterItems();
 const navItems = [
@@ -101,13 +102,7 @@ export default function Nav() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
+          <Logo />
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />

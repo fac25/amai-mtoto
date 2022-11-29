@@ -3,11 +3,7 @@ import BabyProgress from "../components/BabyProgress";
 import Layout from "../components/Layout";
 
 const HomePage = () => {
-  return (
-    <Layout>
-      <BabyProgress />
-    </Layout>
-  );
+  return <Layout></Layout>;
 };
 
 export default HomePage;
