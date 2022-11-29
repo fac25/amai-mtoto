@@ -23,13 +23,13 @@ import {
 } from "@chakra-ui/icons";
 
 const trimesterItems = createTrimesterItems();
-const navItems = [{label: 'Home', href: '/home-page'}, ...trimesterItems];
-
-
-// - Trimesters
-// - Login/Sign Up
-// - FAQs
-// - Search (maybe?)
+const navItems = [
+  { label: "Home", href: "/home-page" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Search", href: "/search" },
+  { label: "About Us", href: "/about-us" },
+  ...trimesterItems,
+];
 
 function createTrimesterItems() {
   const TRIMESTERS = 3;
@@ -57,10 +57,13 @@ function createTrimesterItems() {
     trimesterItems.push({
       label: `Trimester ${trimesterNumber}`,
       children: [
-        ...TOPICS.map((topic) => ({
-          ...topic,
-          href: `trimester-${trimesterNumber}/${topic.label.toLowerCase()}`,
-        })),
+        ...TOPICS.map((topic) => {
+          const topicName = topic.label.toLowerCase().replace(" ", "-");
+          return {
+            ...topic,
+            href: `trimester-${trimesterNumber}/${topicName}`,
+          };
+        }),
       ],
     });
   }
