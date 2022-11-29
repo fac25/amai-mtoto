@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
+import { AuthContextProvider } from "../context/AuthContext";
 
 const colors = {
   brand: {
@@ -14,7 +15,9 @@ const theme = extendTheme({ colors });
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <AuthContextProvider>
+        <Component {...pageProps} />
+      </AuthContextProvider>
     </ChakraProvider>
   );
 }
