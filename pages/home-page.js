@@ -1,13 +1,12 @@
 import React from "react";
 import BabyProgress from "../components/BabyProgress";
-import Nav from "../components/Nav";
+import Layout from "../components/Layout";
 
 const HomePage = () => {
   return (
-    <div>
-      <Nav />
+    <Layout>
       <BabyProgress />
-    </div>
+    </Layout>
   );
 };
 

@@ -4,6 +4,7 @@ import Media from "../components/Media";
 const AboutUs = () => {
   return (
     <div>
+      <h2>You are now on about us page</h2>
       <Media
         // mediaType="video"
         // mediaSrc="vWXrFetSH8w"
