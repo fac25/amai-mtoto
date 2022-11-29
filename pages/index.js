@@ -10,6 +10,27 @@ export async function getServerSideProps() {
 }
 
 export default function Home() {
+  const formElements = [
+    {
+      label: "Email",
+      inputType: "email",
+      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+      error: "Invalid email. Please use an @.",
+    },
+    {
+      label: "Username",
+      inputType: "text",
+    },
+    {
+      label: "Trimester",
+      inputType: "number",
+    },
+  ];
+
+  function formSubmitFunction(formData) {
+    console.log("hello");
+  }
+
   return (
     <div className={styles.container}>
       <main>
@@ -17,6 +38,10 @@ export default function Home() {
           Hello to <a href="https://nextjs.org">Next.js!</a>
         </h1>
       </main>
+      <Form
+        formElements={formElements}
+        formSubmitFunction={formSubmitFunction}
+      />
       <footer></footer>
     </div>
   );

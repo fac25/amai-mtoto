@@ -1,20 +1,23 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-const Form = (/*{ formElements, formSubmitFunction }*/) => {
+const Form = ({ formElements, formSubmitFunction }) => {
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
-  const onSubmit = formSubmitFunction();
+  const onSubmit = (data) => {
+    formSubmitFunction(data);
+  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} action="">
       {formElements.map((element, i) => {
         return (
           <div key={i}>
             <label htmlFor={element.label}>{element.label}:</label>
             <input
               type={element.type}
+              id={element.label}
               {...register(`${element.label}`, {
                 required: "Required",
                 pattern: {
