@@ -1,5 +1,6 @@
 import React from "react";
 import Media from "./Media";
+import LogoImg from "../public/amai-mtoto.jpg";
 
 const Logo = () => {
   return (
@@ -7,10 +8,10 @@ const Logo = () => {
       <Media
         // mediaType="video"
         // mediaSrc="vWXrFetSH8w"
-        height="400"
-        width="600"
+        height="64"
+        width="64"
         mediaType="image"
-        mediaSrc="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+        mediaSrc={LogoImg.src}
       />
     </div>
   );
