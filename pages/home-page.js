@@ -1,9 +1,14 @@
 import React from "react";
-import BabyProgress from "../components/BabyProgress";
 import Layout from "../components/Layout";
+import Tabs from "../components/Tabs";
 
 const HomePage = () => {
-  return <Layout></Layout>;
+  const tabs = [{ name: "Trimester 1", content: "I am content" }];
+  return (
+    <Layout>
+      <Tabs tabs={tabs} />
+    </Layout>
+  );
 };
 
 export default HomePage;
