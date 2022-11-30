@@ -1,8 +1,8 @@
-
 import styles from "../styles/Home.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import Layout from "../components/Layout";
+import ChakraButton from "../components/ChakraButton";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,8 +11,6 @@ import "swiper/css/navigation";
 import Head from "next/head";
 
 import Form from "../components/Form";
-
-import Footer from "../components/Footer";
 
 export async function getServerSideProps() {
   return {
@@ -26,6 +24,10 @@ export default function Home() {
     "https://images.unsplash.com/photo-1669166717463-38a78c93412b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80",
   ];
 
+  // function onClick() {
+  //   console.log("hello");
+  // }
+
   return (
     <Layout>
       <div className={styles.container}>
@@ -34,6 +36,7 @@ export default function Home() {
             Hello to <a href="https://nextjs.org">Next.js!</a>
           </h1>
           <Carousel mediaSrcArr={mediaSrcArr} cardsHeight={"400px"} />
+          {/* <ChakraButton text={"Explore"} functionOnClick={onClick} /> */}
         </main>
       </div>
     </Layout>
@@ -63,10 +66,10 @@ function Carousel({ mediaSrcArr, cardsHeight }) {
         );
       })}
     </Swiper>
-    );
-   }
+  );
+}
 
- /* const formElements = [
+/* const formElements = [
     {
       label: "Email",
       inputType: "email",

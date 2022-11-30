@@ -1,12 +1,10 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 
-const ChakraButton = (props) => {
+const ChakraButton = ({ text, functionOnClick }) => {
   return (
     <div>
-      <Button onClick={props.functionToCallWhenButtonIsClicked}>
-        {props.children}
-      </Button>
+      <Button onClick={functionOnClick}>{text}</Button>
     </div>
   );
 };
