@@ -4,7 +4,6 @@ import Layout from "../components/Layout";
 import { getAllFAQs } from "../firebase/firestore";
 
 export async function getServerSideProps() {
-  console.log("hi");
   const questionsData = await getAllFAQs();
   return {
     props: {
@@ -21,16 +20,12 @@ export default function FaqPage({ questionsData }) {
   };
 
   const styles = {
-    // bgColor: 'white',
     titleTextColor: "black",
     rowTitleColor: "black",
-    // rowContentColor: 'grey',
-    // arrowColor: "red",
   };
 
   const config = {
     animate: true,
-    // arrowIcon: "V",
     tabFocus: true,
   };
 
