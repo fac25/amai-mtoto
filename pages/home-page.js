@@ -20,19 +20,30 @@ import {
   Divider,
 } from "@chakra-ui/react";
 
+// export async function getServerSideProps({ params }) {
+//   return {
+//     props: {
+//       trimester: params.trimester,
+//       topicId: params.topicId,
+//     },
+//   };
+// }
+
 export async function getServerSideProps({ params }) {
+  // const trimesterId = params.id;
+  const trimesterId = 1;
   const exerciseArticles = await getArticlesByTopicTrimester(
     "exercise",
-    params.trimesterId
+    trimesterId
   );
   const wellbeingArticles = await getArticlesByTopicTrimester(
     "wellbeing",
-    params.trimesterId
+    trimesterId
   );
 
   const recipeArticles = await getArticlesByTopicTrimester(
     "recipe",
-    params.trimesterId
+    trimesterId
   );
 
   // console.log(exerciseArticles);
@@ -45,7 +56,7 @@ export async function getServerSideProps({ params }) {
 
 // Display articles
 
-const HomePage = ({ exerciseArticles }) => {
+const HomePage = ({ exerciseArticles, wellbeingArticles, recipeArticles }) => {
   return (
     <Layout>
       <div>
