@@ -2,7 +2,6 @@ describe("Landing page test", () => {
   it("Visits Landing Page", () => {
     cy.visit("http://localhost:3000");
   });
-  const trimesters = [1, 2, 3];
   const topics = ["Exercise", "Well being", "Recipes"];
   it(`Hovers trimester 1 and displays topics`, () => {
     cy.contains(`Trimester 1`).trigger("hover");
