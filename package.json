@@ -2,6 +2,7 @@
   "name": "amai-mtoto",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "cypress:open": "cypress open",
     "dev": "next dev",

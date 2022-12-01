@@ -2,12 +2,19 @@ import { useRouter } from "next/router";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-export default function TrimesterTabs({ tabs, selectedTrimester }) {
+export default function TrimesterTabs({
+  tabs,
+  chosenTrimester,
+  setChosenTrimester,
+}) {
   const router = useRouter();
   const tabsLabel = tabs.map(({ name }, index) => (
     <Tab
       key={`tab-${index}`}
-      onClick={() => router.push(`/home-page?trimester=${index + 1}`)}
+      onClick={() => {
+        setChosenTrimester(index + 1);
+        router.push(`/home-page?trimester=${index + 1}`);
+      }}
     >
       {name}
     </Tab>
@@ -17,7 +24,7 @@ export default function TrimesterTabs({ tabs, selectedTrimester }) {
   ));
   return (
     <Tabs
-      defaultIndex={selectedTrimester - 1}
+      defaultIndex={chosenTrimester - 1}
       style={{
         display: "flex",
         flexDirection: "column",
