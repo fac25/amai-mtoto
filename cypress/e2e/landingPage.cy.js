@@ -4,18 +4,16 @@ describe("Landing page test", () => {
   });
   const trimesters = [1, 2, 3];
   const topics = ["Exercise", "Well being", "Recipes"];
-  trimesters.map((num, i) => {
-    it(`Hovers trimester ${num} and displays topics`, () => {
-      cy.contains(`Trimester ${num}`).trigger("hover");
-      cy.contains("Exercise");
-      cy.contains("Well being");
-      cy.contains("Recipes");
+  it(`Hovers trimester 1 and displays topics`, () => {
+    cy.contains(`Trimester 1`).trigger("hover");
+    cy.contains("Exercise");
+    cy.contains("Well being");
+    cy.contains("Recipes");
+  });
+  topics.forEach((topic) => {
+    it(`Trimester 1 - Goes to ${topic} page`, () => {
+      cy.contains(`Trimester 1`).click();
+      cy.contains(`${topic}`).click();
     });
-    topics.forEach((topic) =>
-      it(`Trimester ${num} - Goes to ${topic} page`, () => {
-        cy.contains(`Trimester 2`).trigger("hover");
-        cy.contains(`${topic}`);
-      })
-    );
   });
 });
