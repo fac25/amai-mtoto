@@ -3,10 +3,7 @@ import BabyProgress from "../components/BabyProgress";
 import Nav from "../components/Nav";
 import { useAuth } from "../context/AuthContext";
 import { getUserById, getBabySizeByWeek } from "../firebase/firestore";
-import {
-  howManyWeeksUntil,
-  weeksUntilMappedToPregnancyWeek,
-} from "../lib/helper-functions";
+import { whichWeekToQueryFromBabySize } from "../lib/helper-functions";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -23,21 +20,14 @@ const HomePage = () => {
         setName(username);
         let dueDate = userFromDb.dueDate;
         //- [x] then get the correct babySize from the db
-        let currentDate = new Date().getTime();
-        let howManyWeeksUntilDueDate = howManyWeeksUntil(dueDate, currentDate);
-        let whichWeekToQueryFromBabySize = weeksUntilMappedToPregnancyWeek(
-          howManyWeeksUntilDueDate
-        );
-        setWeekNum(whichWeekToQueryFromBabySize);
-        getBabySizeByWeek(`Week ${whichWeekToQueryFromBabySize}`).then(
-          (babySizeData) => {
-            //console.log(babySizeData);
-            setBabySizeObj(babySizeData);
-          }
-        );
+        let weekToQuery = whichWeekToQueryFromBabySize(dueDate);
+        setWeekNum(weekToQuery);
+        getBabySizeByWeek(`Week ${weekToQuery}`).then((babySizeData) => {
+          //console.log(babySizeData);
+          setBabySizeObj(babySizeData);
+        });
       });
     }
-
     //- [x] then render it
     //- [x] for non-logged in users, hide babyprogress component
   }, [user]);
