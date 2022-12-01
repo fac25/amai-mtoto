@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from "swiper";
 import Layout from "../components/Layout";
 import ChakraButton from "../components/ChakraButton";
 import { useRouter } from "next/router";
+import { Flex } from "@chakra-ui/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -48,7 +49,17 @@ export default function Home() {
             Hello to <a href="https://nextjs.org">Next.js!</a>
           </h1>
           <Carousel mediaSrcArr={mediaSrcArr} cardsHeight={"400px"} />
-          <ChakraButton text={buttonTexts} functionOnClick={onClick} />
+          <Flex>
+            {buttonTexts.map((button, i) => {
+              return (
+                <div key={i}>
+                  <ChakraButton functionToCallWhenButtonIsClicked={onClick}>
+                    {button}
+                  </ChakraButton>
+                </div>
+              );
+            })}
+          </Flex>
         </main>
       </div>
     </Layout>
