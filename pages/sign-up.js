@@ -35,7 +35,7 @@ const Signup = () => {
         addNewUser(user.uid, data.name, ms);
         // data.name is the user's name and ms  is thrir due date
         // [X] once signed up redirect to home page
-        router.push(`/home-page`);
+        router.push(`/home-page?trimester=1`);
       });
     } catch (error) {
       console.log(error.message);

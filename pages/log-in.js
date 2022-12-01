@@ -32,7 +32,7 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         //now redirect to home page
-        router.push(`/home-page`);
+        router.push(`/home-page?trimester=1`);
       });
     } catch (error) {
       // console.log(error.message);
