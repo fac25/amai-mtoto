@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import Layout from "../components/Layout";
 import ChakraButton from "../components/ChakraButton";
+import { useRouter } from "next/router";
 
 // Import Swiper styles
 import "swiper/css";
@@ -19,14 +20,25 @@ export async function getServerSideProps() {
 }
 
 export default function Home() {
+  const router = useRouter();
   const mediaSrcArr = [
     "https://plus.unsplash.com/premium_photo-1669052826135-aa5ca0417430?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDd8NnNNVmpUTFNrZVF8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
     "https://images.unsplash.com/photo-1669166717463-38a78c93412b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=930&q=80",
   ];
 
-  // function onClick() {
-  //   console.log("hello");
-  // }
+  const buttonTexts = [
+    "Explore Trimester 1",
+    "Explore Trimester 2",
+    "Explore Trimester 3",
+  ];
+
+  function onClick(e) {
+    buttonTexts.map((buttonText, i) => {
+      e.target.innerText === buttonText &&
+        // Needs to be changed to /summary when we have route
+        router.push(`/trimester-${i + 1}/exercise`);
+    });
+  }
 
   return (
     <Layout>
@@ -36,7 +48,7 @@ export default function Home() {
             Hello to <a href="https://nextjs.org">Next.js!</a>
           </h1>
           <Carousel mediaSrcArr={mediaSrcArr} cardsHeight={"400px"} />
-          {/* <ChakraButton text={"Explore"} functionOnClick={onClick} /> */}
+          <ChakraButton text={buttonTexts} functionOnClick={onClick} />
         </main>
       </div>
     </Layout>

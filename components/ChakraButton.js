@@ -1,10 +1,18 @@
 import React from "react";
-import { Button } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 
 const ChakraButton = ({ text, functionOnClick }) => {
   return (
     <div>
-      <Button onClick={functionOnClick}>{text}</Button>
+      {text.map((text, i) => {
+        return (
+          <div key={i}>
+            <Flex>
+              <Button onClick={functionOnClick}>{text}</Button>
+            </Flex>
+          </div>
+        );
+      })}
     </div>
   );
 };
