@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "cypress:open": "cypress open",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@types/react": "18.0.25",
+    "cypress": "^11.2.0",
     "eslint-config-prettier": "^8.5.0"
   }
 }

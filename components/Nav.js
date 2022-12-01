@@ -62,7 +62,7 @@ function createTrimesterItems() {
           const topicName = topic.label.toLowerCase().replace(" ", "-");
           return {
             ...topic,
-            href: `trimester-${trimesterNumber}/${topicName}`,
+            href: `/trimester-${trimesterNumber}/${topicName}`,
           };
         }),
       ],
@@ -184,7 +184,11 @@ const DesktopNav = () => {
               >
                 <Stack>
                   {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
+                    <DesktopSubNav
+                      key={child.label}
+                      id={child.label}
+                      {...child}
+                    />
                   ))}
                 </Stack>
               </PopoverContent>
