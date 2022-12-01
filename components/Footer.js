@@ -28,6 +28,10 @@ const Footer = () => {
         Forum
       </Link>
       <Spacer />
+      <Link as={NextLink} href="/disclaimer">
+        Disclaimer
+      </Link>
+      <Spacer />
       <p>&copy;</p>
       <Spacer />
       <Logo />
