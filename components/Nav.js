@@ -62,7 +62,7 @@ function createTrimesterItems() {
           const topicName = topic.label.toLowerCase().replace(" ", "-");
           return {
             ...topic,
-            href: `trimester-${trimesterNumber}/${topicName}`,
+            href: `/trimester-${trimesterNumber}/${topicName}`,
           };
         }),
       ],

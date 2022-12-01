@@ -1,4 +1,3 @@
-
 import styles from "../styles/Home.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
@@ -63,42 +62,42 @@ function Carousel({ mediaSrcArr, cardsHeight }) {
         );
       })}
     </Swiper>
-    );
-   }
+  );
+}
 
- /* const formElements = [
-    {
-      label: "Email",
-      inputType: "email",
-      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-      error: "Invalid email. Please use an @.",
-    },
-    {
-      label: "Username",
-      inputType: "text",
-    },
-    {
-      label: "Trimester",
-      inputType: "number",
-    },
-  ];
+// const formElements = [
+//   {
+//     label: "Email",
+//     inputType: "email",
+//     pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+//     error: "Invalid email. Please use an @.",
+//   },
+//   {
+//     label: "Username",
+//     inputType: "text",
+//   },
+//   {
+//     label: "Trimester",
+//     inputType: "textarea",
+//   },
+// ];
 
-  function formSubmitFunction(formData) {
-    console.log("hello");
-  }
+// function formSubmitFunction(formData) {
+//   console.log(formData);
+// }
 
-  return (
-    <div className={styles.container}>
-      <main>
-        <h1 className={styles.title}>
-          Hello to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-      </main>
-      <Form
-        formElements={formElements}
-        formSubmitFunction={formSubmitFunction}
-      />
-      <Footer></Footer>
-    </div>
-    
+/*
+// return (
+//   <div className={styles.container}>
+//     <main>
+//       <h1 className={styles.title}>
+//         Hello to <a href="https://nextjs.org">Next.js!</a>
+//       </h1>
+//     </main>
+//     <Form
+//       formElements={formElements}
+//       formSubmitFunction={formSubmitFunction}
+//     />
+//     <Footer></Footer>
+//   </div>
 */
