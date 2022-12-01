@@ -1,9 +1,8 @@
-import next from "next";
 import { useRouter } from "next/router";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-export default ({ tabs, selectedTrimester }) => {
+export default function TrimesterTabs({ tabs, selectedTrimester }) {
   const router = useRouter();
   const tabsLabel = tabs.map(({ name }, index) => (
     <Tab
@@ -30,4 +29,4 @@ export default ({ tabs, selectedTrimester }) => {
       {[...tabsContent]}
     </Tabs>
   );
-};
+}

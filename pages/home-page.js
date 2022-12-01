@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import Tabs from "../components/Tabs";
+import TrimesterTabs from "../components/TrimesterTabs";
 import { Text } from "@chakra-ui/react";
 
 export async function getServerSideProps({ query }) {
@@ -20,7 +20,7 @@ const HomePage = ({ selectedTrimester }) => {
   ];
   return (
     <Layout>
-      <Tabs tabs={tabs} selectedTrimester={selectedTrimester} />
+      <TrimesterTabs tabs={tabs} selectedTrimester={selectedTrimester} />
     </Layout>
   );
 };
