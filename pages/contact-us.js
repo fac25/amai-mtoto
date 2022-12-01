@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import {
@@ -11,11 +11,41 @@ import {
   Flex,
   Box,
   Heading,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
-import { isErrored } from "stream";
 
 const ContactUs = () => {
+  const [result, setResult] = useState(false);
   const router = useRouter();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORM_API_KEY);
+
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        res.json();
+        if (res.status === 200) {
+          console.log("Success", res);
+          setResult(true);
+        } else {
+          console.log("Error", res);
+        }
+      })
+      .then(function () {
+        setTimeout(() => {
+          router.push("/home-page");
+        }, 1000);
+      });
+  };
+
   return (
     <Flex width="full" align="center" justifyContent="center" m={[20, 5]}>
       <Box
@@ -29,12 +59,7 @@ const ContactUs = () => {
           <Heading>Contact Us</Heading>
         </Box>
         <Box my={4} textAlign="left">
-          <form action="https://api.web3forms.com/submit" method="POST">
-            <Input
-              type="hidden"
-              name="access_key"
-              value={process.env.NEXT_PUBLIC_WEB3FORM_API_KEY}
-            />
+          <form onSubmit={handleSubmit}>
             <Input
               type="hidden"
               name="subject"
@@ -55,12 +80,20 @@ const ContactUs = () => {
               <Textarea name="msg" rows={5} required></Textarea>
               <FormErrorMessage>Message is required.</FormErrorMessage>
             </FormControl>
-            {/* <Input type="hidden" name="redirect" value="/home-page" /> */}
-            {/* {router.push("/home-page")} */}
+
             <Button type="submit" mt={5}>
               Send Message
             </Button>
           </form>
+
+          {result ? (
+            <Alert status="success" mt={10}>
+              <AlertIcon />
+              Thank You!
+            </Alert>
+          ) : (
+            ""
+          )}
         </Box>
       </Box>
     </Flex>
