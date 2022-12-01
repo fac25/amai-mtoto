@@ -84,7 +84,7 @@ export default function Nav() {
       setUser(null);
       router.push("/landing-page");
     } catch (error) {
-      // console.log(error.message);
+      console.log(error.message);
     }
   };
 
