@@ -1,5 +1,6 @@
 import React from "react";
 import ArticleCard from "../../components/ArticleCard";
+import Layout from "../../components/Layout";
 
 export async function getServerSideProps({ params }) {
   return {
@@ -10,12 +11,14 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-const Topic = ({topicId, trimester}) => {
+const Topic = ({ topicId, trimester }) => {
   return (
-    <div>
-      <h1>{topicId} - {trimester}</h1>
+    <Layout>
+      <h1>
+        {topicId} - {trimester}
+      </h1>
       <ArticleCard />
-    </div>
+    </Layout>
   );
 };
 

@@ -86,22 +86,22 @@ function Carousel({ mediaSrcArr, cardsHeight }) {
     },
   ];
 
-  function formSubmitFunction(formData) {
-    console.log("hello");
-  }
+// function formSubmitFunction(formData) {
+//   console.log(formData);
+// }
 
-  return (
-    <div className={styles.container}>
-      <main>
-        <h1 className={styles.title}>
-          Hello to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-      </main>
-      <Form
-        formElements={formElements}
-        formSubmitFunction={formSubmitFunction}
-      />
-      <Footer></Footer>
-    </div>
-    
+/*
+// return (
+//   <div className={styles.container}>
+//     <main>
+//       <h1 className={styles.title}>
+//         Hello to <a href="https://nextjs.org">Next.js!</a>
+//       </h1>
+//     </main>
+//     <Form
+//       formElements={formElements}
+//       formSubmitFunction={formSubmitFunction}
+//     />
+//     <Footer></Footer>
+//   </div>
 */
