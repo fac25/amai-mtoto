@@ -38,17 +38,17 @@ import {
   whichTrimesterAreYouIn,
 } from "../lib/helper-functions";
 
-const TOPIC = ["exercise", "wellbeing", "recipe"];
+const TOPIC = ["exercise", "recipe", "wellbeing"];
 
 export async function getServerSideProps({ query }) {
-  const selectedTrimester = query.trimester;
-  const articlesByTrimester = await getArticlesByTrimester(selectedTrimester);
+  const chosenTrimester = query.trimester || 1;
+  const articlesByTrimester = await getArticlesByTrimester(chosenTrimester);
 
   const articlesByTrimesterTopic = getArticleByTopic(articlesByTrimester);
 
   return {
     props: {
-      selectedTrimester,
+      chosenTrimester,
       articlesByTrimesterTopic,
     },
   };
@@ -72,17 +72,11 @@ function getArticleByTopic(articles) {
   return articleByTopic;
 }
 
-const HomePage = ({ selectedTrimester, articlesByTrimesterTopic }) => {
-  const tabs = [
-    { name: "Trimester 1", content: <Text>I am content 1</Text> },
-    { name: "Trimester 2", content: <Text>I am content 2</Text> },
-    { name: "Trimester 3", content: <Text>I am content 3</Text> },
-  ];
+const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
   const { user } = useAuth();
   const [babySizeObj, setBabySizeObj] = useState({});
   const [name, setName] = useState();
   const [weekNum, setWeekNum] = useState();
-  const [chosenTrimester, setChosenTrimester] = useState(1);
   const router = useRouter();
 
   useEffect(() => {
@@ -112,6 +106,17 @@ const HomePage = ({ selectedTrimester, articlesByTrimesterTopic }) => {
     //- [x] then render it
     //- [x] for non-logged in users, hide babyprogress component
   }, [user]);
+
+  const topicCards = TOPIC.map((topic, index) => ({
+    name: topic,
+    content: (
+      <ArticleCard
+        key={`card-${index}`}
+        articles={articlesByTrimesterTopic[index]}
+      />
+    ),
+  }));
+
   return (
     <Layout>
       {!user ? null : (
@@ -122,22 +127,11 @@ const HomePage = ({ selectedTrimester, articlesByTrimesterTopic }) => {
           sizeDescriptor={babySizeObj.description}
         />
       )}
-      <TrimesterTabs
-        tabs={tabs}
-        chosenTrimester={chosenTrimester}
-        setChosenTrimester={setChosenTrimester}
-      />
 
-      {TOPIC.map((topic, index) => {
-        return (
-          <>
-            <Heading as="h3" mt={10} key={index}>
-              {TOPIC[index].charAt(0).toUpperCase() + TOPIC[index].slice(1)}
-            </Heading>
-            <ArticleCard articles={articlesByTrimesterTopic[index]} />
-          </>
-        );
-      })}
+      <TrimesterTabs
+        chosenTrimester={chosenTrimester}
+        topicCards={topicCards}
+      />
     </Layout>
   );
 };
