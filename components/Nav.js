@@ -148,7 +148,7 @@ export default function Nav() {
               fontWeight={600}
               color={"white"}
               bg={"pink.400"}
-              href={"/sign-up"}
+              onClick={() => router.push("/sign-up")}
               _hover={{
                 bg: "pink.300",
               }}
