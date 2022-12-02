@@ -58,7 +58,7 @@ export async function getServerSideProps({ query }) {
 function getArticleByTopic(articles) {
   let articleByTopic = [];
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < TOPIC.length; i++) {
     articleByTopic.push([]);
   }
 
