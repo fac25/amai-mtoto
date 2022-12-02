@@ -59,12 +59,7 @@ async function getArticlesByTrimester(trimesterNum) {
   const articlesRef = collection(db, "articles");
   const q = query(
     articlesRef,
-    where(
-      "trimesterRelated",
-      "array-contains",
-      trimesterNum,
-      getArticlesByKeyword
-    )
+    where("trimesterRelated", "array-contains", parseInt(trimesterNum))
   );
   let filteredArticlesByTrimester = [];
   let articleQueryResult = await getDocs(q);
@@ -72,6 +67,18 @@ async function getArticlesByTrimester(trimesterNum) {
     filteredArticlesByTrimester.push(snap.data());
   });
   return filteredArticlesByTrimester;
+}
+
+async function getArticlesByTopic(topic) {
+  const articlesRef = collection(db, "articles");
+  const q = query(articlesRef, where("topic", "array-contains", topic));
+  let filteredArticlesByTopic = [];
+  let articleQueryResult = await getDocs(q);
+  articleQueryResult.forEach((snap) => {
+    filteredArticlesByTopic.push(snap.data());
+    // console.log(snap.data());
+  });
+  return filteredArticlesByTopic;
 }
 
 async function updateArticle(
@@ -155,6 +162,7 @@ export {
   getUserById,
   addNewArticle,
   getArticlesByTrimester,
+  getArticlesByTopic,
   getArticlesByKeyword,
   addBabySize,
   getBabySizeByWeek,

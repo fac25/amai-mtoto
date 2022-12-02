@@ -7,7 +7,7 @@ function TopicSection({ topicName, summary, children, href }) {
       <Heading>{topicName}</Heading>
       <Text>{summary}</Text>
       <Link href={href}>Read more</Link>
-      <div>{children}</div>
+      <div style={{ maxWidth: "100vw" }}>{children}</div>
     </div>
   );
 }

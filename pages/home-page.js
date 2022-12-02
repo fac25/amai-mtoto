@@ -1,26 +1,78 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
+// Firestore
+import {
+  getArticlesByTrimester,
+  getUserById,
+  getBabySizeByWeek,
+} from "../firebase/firestore";
+
+// Swiper
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// Chakra-UI
+import {
+  Card,
+  CardBody,
+  Stack,
+  Heading,
+  Text,
+  Divider,
+  Link,
+} from "@chakra-ui/react";
+
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+
+// User defined components
+import BabyProgress from "../components/BabyProgress";
 import Layout from "../components/Layout";
 import TrimesterTabs from "../components/TrimesterTabs";
-
-import BabyProgress from "../components/BabyProgress";
 import { useAuth } from "../context/AuthContext";
-import { getUserById, getBabySizeByWeek } from "../firebase/firestore";
 import {
   whichWeekToQueryFromBabySize,
   whichTrimesterAreYouIn,
 } from "../lib/helper-functions";
-import { useRouter } from "next/router";
+
+const TOPIC = ["exercise", "recipe", "wellbeing"];
 
 export async function getServerSideProps({ query }) {
   const chosenTrimester = query.trimester || 1;
+  const articlesByTrimester = await getArticlesByTrimester(chosenTrimester);
+
+  const articlesByTrimesterTopic = getArticleByTopic(articlesByTrimester);
+
   return {
     props: {
       chosenTrimester,
+      articlesByTrimesterTopic,
     },
   };
 }
 
-const HomePage = ({ chosenTrimester }) => {
+// get the article by topic
+function getArticleByTopic(articles) {
+  let articleByTopic = [];
+
+  for (let i = 0; i < TOPIC.length; i++) {
+    articleByTopic.push([]);
+  }
+
+  TOPIC.map((topic, index) => {
+    articles.forEach((article) => {
+      if (article.topic.includes(TOPIC[index])) {
+        articleByTopic[index].push(article);
+      }
+    });
+  });
+  return articleByTopic;
+}
+
+const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
   const { user } = useAuth();
   const [babySizeObj, setBabySizeObj] = useState({});
   const [name, setName] = useState();
@@ -54,6 +106,17 @@ const HomePage = ({ chosenTrimester }) => {
     //- [x] then render it
     //- [x] for non-logged in users, hide babyprogress component
   }, [user]);
+
+  const topicCards = TOPIC.map((topic, index) => ({
+    name: topic,
+    content: (
+      <ArticleCard
+        key={`card-${index}`}
+        articles={articlesByTrimesterTopic[index]}
+      />
+    ),
+  }));
+
   return (
     <Layout>
       {!user ? null : (
@@ -64,9 +127,57 @@ const HomePage = ({ chosenTrimester }) => {
           sizeDescriptor={babySizeObj.description}
         />
       )}
-      <TrimesterTabs chosenTrimester={chosenTrimester} />
+
+      <TrimesterTabs
+        chosenTrimester={chosenTrimester}
+        topicCards={topicCards}
+      />
     </Layout>
   );
 };
+
+function ArticleCard({ articles }) {
+  return (
+    <>
+      <Swiper
+        slidesPerView={3}
+        // centeredSlides={true}
+        spaceBetween={30}
+        pagination={{
+          type: "fraction",
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        // loop={true}
+        className="mySwiper"
+        mt={10}
+      >
+        {articles.length > 0 &&
+          articles.map((article, index) => {
+            const { topic, trimesterRelated, title, media } = article;
+
+            return (
+              <SwiperSlide key={index}>
+                <Card maxW="sm">
+                  <Link href={media[0].src} isExternal>
+                    <CardBody>
+                      <ExternalLinkIcon mx="2px" />
+                      <Stack mt="6" spacing="3">
+                        <Heading size="md">{title}</Heading>
+                        <Divider />
+                        <Text>{`Trimester: ${trimesterRelated}`}</Text>
+                        <Divider />
+                        <Text>{`Topics: ${topic}`}</Text>
+                      </Stack>
+                    </CardBody>
+                  </Link>
+                </Card>
+              </SwiperSlide>
+            );
+          })}
+      </Swiper>
+    </>
+  );
+}
 
 export default HomePage;

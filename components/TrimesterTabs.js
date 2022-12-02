@@ -4,7 +4,7 @@ import TopicSection from "./TopicSection";
 import TABS_CONTENT from "../lib/data/tabsContent";
 import "react-tabs/style/react-tabs.css";
 
-export default function TrimesterTabs({ chosenTrimester }) {
+export default function TrimesterTabs({ chosenTrimester, topicCards }) {
   const router = useRouter();
   const tabs = TABS_CONTENT.map((tab) => {
     const tabObj = {};
@@ -15,13 +15,15 @@ export default function TrimesterTabs({ chosenTrimester }) {
           " ",
           "-"
         );
+
       return (
         <TopicSection
           key={`section-${index}`}
           topicName={topicName}
           summary={summary}
-          href={readMoreUrl}
-        />
+        >
+          {topicCards[index].content}
+        </TopicSection>
       );
     });
     return tabObj;
