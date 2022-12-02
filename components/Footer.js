@@ -7,35 +7,37 @@ import Logo from "./Logo";
 
 const Footer = () => {
   return (
-    <Flex>
-      <Link as={NextLink} href="/about-us">
-        About us
-      </Link>
-      <Spacer />
-      <Link as={NextLink} href="/contact-us">
-        Contact us
-      </Link>
-      <Spacer />
-      <Link as={NextLink} href="/glossary">
-        Glossary
-      </Link>
-      <Spacer />
-      <Link as={NextLink} href="/developers">
-        Developers
-      </Link>
-      <Spacer />
-      <Link as={NextLink} href="https://tfb-ros.forumotion.com/">
-        Forum
-      </Link>
-      <Spacer />
-      <Link as={NextLink} href="/disclaimer">
-        Disclaimer
-      </Link>
-      <Spacer />
-      <p>&copy;</p>
-      <Spacer />
-      <Logo />
-    </Flex>
+    <footer>
+      <Flex>
+        <Link as={NextLink} href="/about-us">
+          About us
+        </Link>
+        <Spacer />
+        <Link as={NextLink} href="/contact-us">
+          Contact us
+        </Link>
+        <Spacer />
+        <Link as={NextLink} href="/glossary">
+          Glossary
+        </Link>
+        <Spacer />
+        <Link as={NextLink} href="/developers">
+          Developers
+        </Link>
+        <Spacer />
+        <Link as={NextLink} href="https://tfb-ros.forumotion.com/">
+          Forum
+        </Link>
+        <Spacer />
+        <Link as={NextLink} href="/disclaimer">
+          Disclaimer
+        </Link>
+        <Spacer />
+        <p>&copy;</p>
+        <Spacer />
+        <Logo />
+      </Flex>
+    </footer>
   );
 };
 
