@@ -82,7 +82,7 @@ export default function Nav() {
     try {
       await logOut();
       setUser(null);
-      router.push("/landing-page");
+      router.push("/");
     } catch (error) {
       console.log(error.message);
     }
