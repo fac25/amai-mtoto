@@ -5,8 +5,11 @@ import Layout from "../components/Layout";
 import ChakraButton from "../components/ChakraButton";
 import { useRouter } from "next/router";
 import { Flex } from "@chakra-ui/react";
+
 import WomanByWall from "../public/landingPageImages/Woman-by-wall.jpg";
 import WomanLookingUp from "../public/landingPageImages/woman-looking-up.jpg";
+
+import carouselWriting from "../lib/data/carouselContent";
 
 // Import Swiper styles
 import "swiper/css";
@@ -23,6 +26,7 @@ export async function getServerSideProps() {
 }
 
 export default function Home() {
+  console.log(carouselWriting);
   const router = useRouter();
   const mediaSrcArr = [WomanByWall.src, WomanLookingUp.src];
 
@@ -84,15 +88,7 @@ function Carousel({ mediaSrcArr, cardsHeight }) {
             }}
           >
             <div>
-              <p>
-                Amai Mtoto simply translates as mother and child, taken from the
-                languages from Shona (Zimbabwe) and Swahili (South Africa). This
-                pregnancy wellness app has been designed for those from a
-                Afro-Caribbean background to give you evidence based information
-                in the areas of exercise, nutrition and diet, mental wellbeing,
-                and parent education to help support and empower you and your
-                family through your pregnancy journey and beyond.
-              </p>
+              <p>{carouselWriting[index]}</p>
             </div>
           </SwiperSlide>
         );
