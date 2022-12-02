@@ -2,22 +2,33 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import TrimesterTabs from "../components/TrimesterTabs";
 import { Text } from "@chakra-ui/react";
+import TopicSection from "../components/TopicSection";
 
 export async function getServerSideProps({ query }) {
-  const selectedTrimester = query.trimester;
+  const selectedTrimester = query.trimester || 1;
   return {
     props: {
-      selectedTrimester: selectedTrimester,
+      selectedTrimester,
     },
   };
 }
 
 const HomePage = ({ selectedTrimester }) => {
-  const tabs = [
-    { name: "Trimester 1", content: <Text>I am content 1</Text> },
-    { name: "Trimester 2", content: <Text>I am content 2</Text> },
-    { name: "Trimester 3", content: <Text>I am content 3</Text> },
-  ];
+  
+
+  const tabs = TABS_CONTENT.map((tab) => {
+    const tabObj = {};
+    tabObj.name = tab.name;
+    tabObj.content = tab.topics.map(({ topicName, summary }, index) => (
+      <TopicSection
+        key={`section-${index}`}
+        topicName={topicName}
+        summary={summary}
+      />
+    ));
+    return tabObj;
+  });
+
   return (
     <Layout>
       <TrimesterTabs tabs={tabs} selectedTrimester={selectedTrimester} />
