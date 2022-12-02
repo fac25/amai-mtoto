@@ -22,10 +22,13 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import Logo from "./Logo";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router";
+import ChakraButton from "./ChakraButton";
 
 const trimesterItems = createTrimesterItems();
 const navItems = [
-  { label: "Home", href: "/home-page" },
+  { label: "Home", href: "/home-page?trimester=1" },
   { label: "FAQ", href: "/faq" },
   { label: "Search", href: "/search" },
   { label: "About Us", href: "/about-us" },
@@ -62,7 +65,7 @@ function createTrimesterItems() {
           const topicName = topic.label.toLowerCase().replace(" ", "-");
           return {
             ...topic,
-            href: `trimester-${trimesterNumber}/${topicName}`,
+            href: `/trimester-${trimesterNumber}/${topicName}`,
           };
         }),
       ],
@@ -73,6 +76,17 @@ function createTrimesterItems() {
 
 export default function Nav() {
   const { isOpen, onToggle } = useDisclosure();
+  const { user, logOut, setUser } = useAuth();
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      setUser(null);
+      router.push("/landing-page");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <Box>
@@ -108,36 +122,41 @@ export default function Nav() {
             <DesktopNav />
           </Flex>
         </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
+        {user ? (
+          <ChakraButton functionToCallWhenButtonIsClicked={handleLogout}>
+            Logout
+          </ChakraButton>
+        ) : (
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={"flex-end"}
+            direction={"row"}
+            spacing={6}
           >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            href={"#"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
-        </Stack>
+            <Button
+              as={"a"}
+              fontSize={"sm"}
+              fontWeight={400}
+              variant={"link"}
+              href={"/log-in"}
+            >
+              Sign In
+            </Button>
+            <Button
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"pink.400"}
+              href={"/sign-up"}
+              _hover={{
+                bg: "pink.300",
+              }}
+            >
+              Sign Up
+            </Button>
+          </Stack>
+        )}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -184,7 +203,11 @@ const DesktopNav = () => {
               >
                 <Stack>
                   {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
+                    <DesktopSubNav
+                      key={child.label}
+                      id={child.label}
+                      {...child}
+                    />
                   ))}
                 </Stack>
               </PopoverContent>

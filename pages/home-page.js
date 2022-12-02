@@ -1,73 +1,143 @@
-import { title } from "process";
-import React from "react";
-import BabyProgress from "../components/BabyProgress";
-import Layout from "../components/Layout";
-import { getArticlesByTopicTrimester } from "../firebase/firestore";
-import SwiperCore, { Navigation, Pagination } from "swiper";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
+// Firestore
+import {
+  getArticlesByTrimester,
+  getUserById,
+  getBabySizeByWeek,
+} from "../firebase/firestore";
+
+// Swiper
+import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+// Chakra-UI
 import {
   Card,
   CardBody,
-  Image,
   Stack,
   Heading,
   Text,
   Divider,
+  Link,
 } from "@chakra-ui/react";
 
-// export async function getServerSideProps({ params }) {
-//   return {
-//     props: {
-//       trimester: params.trimester,
-//       topicId: params.topicId,
-//     },
-//   };
-// }
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
-export async function getServerSideProps({ params }) {
-  // const trimesterId = params.id;
-  const trimesterId = 1;
-  const exerciseArticles = await getArticlesByTopicTrimester(
-    "exercise",
-    trimesterId
-  );
-  const wellbeingArticles = await getArticlesByTopicTrimester(
-    "wellbeing",
-    trimesterId
-  );
+// User defined components
+import BabyProgress from "../components/BabyProgress";
+import Layout from "../components/Layout";
+import TrimesterTabs from "../components/TrimesterTabs";
+import { useAuth } from "../context/AuthContext";
+import {
+  whichWeekToQueryFromBabySize,
+  whichTrimesterAreYouIn,
+} from "../lib/helper-functions";
 
-  const recipeArticles = await getArticlesByTopicTrimester(
-    "recipe",
-    trimesterId
-  );
+const TOPIC = ["exercise", "wellbeing", "recipe"];
 
-  // console.log(exerciseArticles);
+export async function getServerSideProps({ query }) {
+  const selectedTrimester = query.trimester;
+  const articlesByTrimester = await getArticlesByTrimester(selectedTrimester);
+
+  const articlesByTrimesterTopic = getArticleByTopic(articlesByTrimester);
+
   return {
-    props: { exerciseArticles, wellbeingArticles, recipeArticles },
+    props: {
+      selectedTrimester,
+      articlesByTrimesterTopic,
+    },
   };
 }
 
-// Query DB for articles related to the topic
+// get the article by topic
+function getArticleByTopic(articles) {
+  let articleByTopic = [];
 
-// Display articles
+  for (let i = 0; i < 3; i++) {
+    articleByTopic.push([]);
+  }
 
-const HomePage = ({ exerciseArticles, wellbeingArticles, recipeArticles }) => {
+  TOPIC.map((topic, index) => {
+    articles.forEach((article) => {
+      if (article.topic.includes(TOPIC[index])) {
+        articleByTopic[index].push(article);
+      }
+    });
+  });
+  return articleByTopic;
+}
+
+const HomePage = ({ selectedTrimester, articlesByTrimesterTopic }) => {
+  const tabs = [
+    { name: "Trimester 1", content: <Text>I am content 1</Text> },
+    { name: "Trimester 2", content: <Text>I am content 2</Text> },
+    { name: "Trimester 3", content: <Text>I am content 3</Text> },
+  ];
+  const { user } = useAuth();
+  const [babySizeObj, setBabySizeObj] = useState({});
+  const [name, setName] = useState();
+  const [weekNum, setWeekNum] = useState();
+  const [chosenTrimester, setChosenTrimester] = useState(1);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      //- [x] for this user, get their username and due date from the db
+      //console.log(user);
+      getUserById(user.uid).then((userFromDb) => {
+        //console.log(userFromDb);
+        let username = userFromDb.username;
+        setName(username);
+        let dueDate = userFromDb.dueDate;
+        //- [x] then get the correct babySize from the db
+        let weekToQuery = whichWeekToQueryFromBabySize(dueDate);
+        setWeekNum(weekToQuery);
+        getBabySizeByWeek(`Week ${weekToQuery}`)
+          .then((babySizeData) => {
+            //console.log(babySizeData);
+            setBabySizeObj(babySizeData);
+          })
+          .then(() => {
+            // - [x] redirect to correct trimester tab based on due date
+            let trimesterThisUserIsIn = whichTrimesterAreYouIn(dueDate);
+            router.push(`/home-page?trimester=${trimesterThisUserIsIn}`);
+          });
+      });
+    }
+    //- [x] then render it
+    //- [x] for non-logged in users, hide babyprogress component
+  }, [user]);
   return (
     <Layout>
-      <div>
-        <h2>Exercises</h2>
-        {/* article card carousel*/}
-        <ArticleCard articles={exerciseArticles} />
-        <h2>Recipes</h2>
-        {/* article card carousel*/}
-        <h2>Well Being</h2>
-        {/* article card carousel*/}
-      </div>
+      {!user ? null : (
+        <BabyProgress
+          mediaSrc={babySizeObj.imgSrc}
+          username={name}
+          weekNum={weekNum}
+          sizeDescriptor={babySizeObj.description}
+        />
+      )}
+      <TrimesterTabs
+        tabs={tabs}
+        chosenTrimester={chosenTrimester}
+        setChosenTrimester={setChosenTrimester}
+      />
+
+      {TOPIC.map((topic, index) => {
+        return (
+          <>
+            <Heading as="h3" mt={10} key={index}>
+              {TOPIC[index].charAt(0).toUpperCase() + TOPIC[index].slice(1)}
+            </Heading>
+            <ArticleCard articles={articlesByTrimesterTopic[index]} />
+          </>
+        );
+      })}
     </Layout>
   );
 };
@@ -78,45 +148,39 @@ function ArticleCard({ articles }) {
       <Swiper
         slidesPerView={3}
         // centeredSlides={true}
-        spaceBetween={10}
+        spaceBetween={30}
         pagination={{
           type: "fraction",
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        loop={true}
+        // loop={true}
         className="mySwiper"
+        mt={10}
       >
-        {articles.map((article, index) => {
-          const { topic, trimesterRelated, title, media } = article;
-          // console.log(article);
-          return (
-            <SwiperSlide key={index}>
-              <Card maxW="sm">
-                <CardBody>
-                  <Image
-                    src={media[0].src}
-                    alt=""
-                    borderRadius="lg"
-                    boxSize="sm"
-                    objectFit="cover"
-                  />
-                  <Stack mt="6" spacing="3">
-                    <Heading size="md">{title}</Heading>
-                    <Divider />
-                    <Text>{`Trimester: ${trimesterRelated}`}</Text>
-                    <Divider />
-                    <Text>{`Topics: ${topic}`}</Text>
-                  </Stack>
-                </CardBody>
-              </Card>
-              {/* <p>{title}</p>
-              <p>{`Trimester: ${trimesterRelated}`}</p>
-              <p>{`Topics: ${topic}`}</p>
-              <img src={media[0].src} alt="" /> */}
-            </SwiperSlide>
-          );
-        })}
+        {articles.length > 0 &&
+          articles.map((article, index) => {
+            const { topic, trimesterRelated, title, media } = article;
+
+            return (
+              <SwiperSlide key={index}>
+                <Card maxW="sm">
+                  <Link href={media[0].src} isExternal>
+                    <CardBody>
+                      <ExternalLinkIcon mx="2px" />
+                      <Stack mt="6" spacing="3">
+                        <Heading size="md">{title}</Heading>
+                        <Divider />
+                        <Text>{`Trimester: ${trimesterRelated}`}</Text>
+                        <Divider />
+                        <Text>{`Topics: ${topic}`}</Text>
+                      </Stack>
+                    </CardBody>
+                  </Link>
+                </Card>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </>
   );

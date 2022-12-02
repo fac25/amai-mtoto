@@ -59,7 +59,7 @@ async function getArticlesByTrimester(trimesterNum) {
   const articlesRef = collection(db, "articles");
   const q = query(
     articlesRef,
-    where("trimesterRelated", "array-contains", trimesterNum)
+    where("trimesterRelated", "array-contains", parseInt(trimesterNum))
   );
   let filteredArticlesByTrimester = [];
   let articleQueryResult = await getDocs(q);
@@ -77,26 +77,6 @@ async function getArticlesByTopic(topic) {
   articleQueryResult.forEach((snap) => {
     filteredArticlesByTopic.push(snap.data());
     // console.log(snap.data());
-  });
-  return filteredArticlesByTopic;
-}
-
-async function getArticlesByTopicTrimester(topic, trimesterNum) {
-  // To do
-  const articlesRef = collection(db, "articles");
-  let q = query(
-    articlesRef,
-    where("trimesterRelated", "array-contains", trimesterNum)
-  );
-
-  let filteredArticlesByTopic = [];
-  let articleQueryResult = await getDocs(q);
-
-  articleQueryResult.forEach((snap) => {
-    if (snap.data().topic.includes(topic)) {
-      filteredArticlesByTopic.push(snap.data());
-      console.log(snap.data());
-    }
   });
   return filteredArticlesByTopic;
 }
@@ -183,7 +163,6 @@ export {
   addNewArticle,
   getArticlesByTrimester,
   getArticlesByTopic,
-  getArticlesByTopicTrimester,
   getArticlesByKeyword,
   addBabySize,
   getBabySizeByWeek,

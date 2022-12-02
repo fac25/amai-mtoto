@@ -1,17 +1,16 @@
 import React from "react";
 import Media from "./Media";
+import { Text } from "@chakra-ui/react";
 
-const BabyProgress = () => {
+const BabyProgress = ({ mediaSrc, username, weekNum, sizeDescriptor }) => {
   return (
     <div>
-      <Media
-        // mediaType="video"
-        // mediaSrc="vWXrFetSH8w"
-        height="400"
-        width="600"
-        mediaType="image"
-        mediaSrc="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-      />
+      <Text>Hi {username}!</Text>
+      <br></br>
+      <Text>
+        You are {weekNum} weeks pregnant. Your baby is {sizeDescriptor}
+      </Text>
+      <Media height="150" width="150" mediaType="image" mediaSrc={mediaSrc} />
     </div>
   );
 };
