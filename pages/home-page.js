@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import TrimesterTabs from "../components/TrimesterTabs";
-import { Text } from "@chakra-ui/react";
+
 import BabyProgress from "../components/BabyProgress";
 import { useAuth } from "../context/AuthContext";
 import { getUserById, getBabySizeByWeek } from "../firebase/firestore";
@@ -12,27 +12,21 @@ import {
 import { useRouter } from "next/router";
 
 export async function getServerSideProps({ query }) {
-  //const selectedTrimester = query.trimester;
-  let selectedTrimester = 1;
+  const chosenTrimester = query.trimester || 1;
   return {
     props: {
-      selectedTrimester: selectedTrimester,
+      chosenTrimester,
     },
   };
 }
 
-const HomePage = ({ selectedTrimester }) => {
-  const tabs = [
-    { name: "Trimester 1", content: <Text>I am content 1</Text> },
-    { name: "Trimester 2", content: <Text>I am content 2</Text> },
-    { name: "Trimester 3", content: <Text>I am content 3</Text> },
-  ];
+const HomePage = ({ chosenTrimester }) => {
   const { user } = useAuth();
   const [babySizeObj, setBabySizeObj] = useState({});
   const [name, setName] = useState();
   const [weekNum, setWeekNum] = useState();
-  const [chosenTrimester, setChosenTrimester] = useState(1);
   const router = useRouter();
+
   useEffect(() => {
     if (user) {
       //- [x] for this user, get their username and due date from the db
@@ -70,11 +64,7 @@ const HomePage = ({ selectedTrimester }) => {
           sizeDescriptor={babySizeObj.description}
         />
       )}
-      <TrimesterTabs
-        tabs={tabs}
-        chosenTrimester={chosenTrimester}
-        setChosenTrimester={setChosenTrimester}
-      />
+      <TrimesterTabs chosenTrimester={chosenTrimester} />
     </Layout>
   );
 };

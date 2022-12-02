@@ -1,18 +1,35 @@
 import { useRouter } from "next/router";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import TopicSection from "./TopicSection";
+import TABS_CONTENT from "../lib/data/tabsContent";
 import "react-tabs/style/react-tabs.css";
 
-export default function TrimesterTabs({
-  tabs,
-  chosenTrimester,
-  setChosenTrimester,
-}) {
+export default function TrimesterTabs({ chosenTrimester }) {
   const router = useRouter();
+  const tabs = TABS_CONTENT.map((tab) => {
+    const tabObj = {};
+    tabObj.name = tab.name;
+    tabObj.content = tab.topics.map(({ topicName, summary }, index) => {
+      const readMoreUrl =
+        `${tab.name.toLowerCase()}/${topicName.toLowerCase()}`.replaceAll(
+          " ",
+          "-"
+        );
+      return (
+        <TopicSection
+          key={`section-${index}`}
+          topicName={topicName}
+          summary={summary}
+          href={readMoreUrl}
+        />
+      );
+    });
+    return tabObj;
+  });
   const tabsLabel = tabs.map(({ name }, index) => (
     <Tab
       key={`tab-${index}`}
       onClick={() => {
-        setChosenTrimester(index + 1);
         router.push(`/home-page?trimester=${index + 1}`);
       }}
     >
