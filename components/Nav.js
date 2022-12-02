@@ -39,6 +39,10 @@ function createTrimesterItems() {
   const TRIMESTERS = 3;
   const TOPICS = [
     {
+      label: "Summary",
+      subLabel: "Find out what to expect during this trimester",
+    },
+    {
       label: "Exercise",
       subLabel: "Find exercises tailored for you",
     },
