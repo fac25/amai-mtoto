@@ -156,6 +156,7 @@ function ArticleCard({ articles }) {
           articles.map((article, index) => {
             const { topic, trimesterRelated, title, src, author } = article;
 
+
             return (
               <SwiperSlide key={index}>
                 <Card maxW="sm">
