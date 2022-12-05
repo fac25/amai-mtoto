@@ -102,4 +102,5 @@ const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
   );
 };
 
+
 export default HomePage;
