@@ -48,7 +48,7 @@ export default function Home() {
     <Layout>
       <div className={styles.container}>
         <main>
-          <h1 className={styles.title}>Amai Mtoto</h1>
+          {/* <h1 className={styles.title}>Amai Mtoto</h1> */}
           <Carousel mediaSrcArr={mediaSrcArr} cardsHeight={"400px"} />
           <Flex>
             {buttonTexts.map((button, i) => {
