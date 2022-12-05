@@ -38,7 +38,7 @@ import {
   whichTrimesterAreYouIn,
 } from "../lib/helper-functions";
 
-const TOPIC = ["exercise", "recipe", "wellbeing"];
+const TOPIC = ["exercise", "nutrition", "wellbeing"];
 
 export async function getServerSideProps({ query }) {
   const chosenTrimester = query.trimester || 1;
@@ -154,20 +154,20 @@ function ArticleCard({ articles }) {
       >
         {articles.length > 0 &&
           articles.map((article, index) => {
-            const { topic, trimesterRelated, title, media } = article;
+            const { topic, trimesterRelated, title, src, author } = article;
 
             return (
               <SwiperSlide key={index}>
                 <Card maxW="sm">
-                  <Link href={media[0].src} isExternal>
+                  <Link href={src} isExternal>
                     <CardBody>
                       <ExternalLinkIcon mx="2px" />
                       <Stack mt="6" spacing="3">
                         <Heading size="md">{title}</Heading>
                         <Divider />
-                        <Text>{`Trimester: ${trimesterRelated}`}</Text>
-                        <Divider />
-                        <Text>{`Topics: ${topic}`}</Text>
+                        <Text>
+                          {author ? `Author: ${author}` : `Author: Unknown`}
+                        </Text>
                       </Stack>
                     </CardBody>
                   </Link>
