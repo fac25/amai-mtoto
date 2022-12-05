@@ -38,7 +38,7 @@ const ArticleCard = ({ articles }) => {
       >
         {articles.length > 0 &&
           articles.map((article, index) => {
-            const { topic, trimesterRelated, title, src } = article;
+            const { topic, trimesterRelated, title, src, author } = article;
 
             return (
               <SwiperSlide key={index}>
@@ -49,9 +49,7 @@ const ArticleCard = ({ articles }) => {
                       <Stack mt="6" spacing="3">
                         <Heading size="md">{title}</Heading>
                         <Divider />
-                        <Text>{`Trimester: ${trimesterRelated}`}</Text>
-                        <Divider />
-                        <Text>{`Topics: ${topic}`}</Text>
+                        <Text>{author || "Unknown Author"}</Text>
                       </Stack>
                     </CardBody>
                   </Link>

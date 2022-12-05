@@ -25,7 +25,7 @@ const Footer = () => {
           Developers
         </Link>
         <Spacer />
-        <Link as={NextLink} href="https://tfb-ros.forumotion.com/">
+        <Link as={NextLink} href="https://amai-mtoto.forumotion.com/">
           Forum
         </Link>
         <Spacer />

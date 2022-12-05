@@ -24,8 +24,10 @@ const Topic = ({ trimesterArticlesDb, topicId, resolvedUrl }) => {
     (topic) => topic.id === resolvedUrl
   );
   const localTopicArticles = topicContent.resources;
-
-  const topicArticles = getArticleByTopic([...trimesterArticlesDb], topicId);
+  const topicArticles = getArticleByTopic(
+    [...localTopicArticles, ...trimesterArticlesDb],
+    topicId
+  );
 
   return (
     <Layout>

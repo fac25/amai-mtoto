@@ -20,7 +20,7 @@ import {
   getArticleByTopic,
 } from "../lib/helper-functions";
 
-const TOPIC = ["exercise", "recipe", "wellbeing"];
+const TOPIC = ["exercise", "nutrition", "wellbeing"];
 
 export async function getServerSideProps({ query }) {
   const chosenTrimester = query.trimester || 1;
