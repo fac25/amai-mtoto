@@ -154,12 +154,12 @@ function ArticleCard({ articles }) {
       >
         {articles.length > 0 &&
           articles.map((article, index) => {
-            const { topic, trimesterRelated, title, media } = article;
+            const { topic, trimesterRelated, title, src } = article;
 
             return (
               <SwiperSlide key={index}>
                 <Card maxW="sm">
-                  <Link href={media[0].src} isExternal>
+                  <Link href={src} isExternal>
                     <CardBody>
                       <ExternalLinkIcon mx="2px" />
                       <Stack mt="6" spacing="3">
