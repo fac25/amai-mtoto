@@ -1,23 +1,38 @@
 import React from "react";
 import ArticleCard from "../../components/ArticleCard";
 import Layout from "../../components/Layout";
+import topicSummaryArr from "../../lib/data/topicSummary";
+import { getArticleByTopic } from "../../lib/helper-functions.js";
+import { getArticlesByTrimester } from "../../firebase/firestore";
+import { Heading } from "@chakra-ui/react";
+export async function getServerSideProps({ params, resolvedUrl }) {
+  const topicId = params.topicId;
+  const trimester = params.trimester.slice(params.trimester.length - 1);
+  const trimesterArticlesDb = await getArticlesByTrimester(trimester);
 
-export async function getServerSideProps({ params }) {
   return {
     props: {
-      trimester: params.trimester,
-      topicId: params.topicId,
+      trimesterArticlesDb,
+      topicId,
+      resolvedUrl,
     },
   };
 }
 
-const Topic = ({ topicId, trimester }) => {
+const Topic = ({ trimesterArticlesDb, topicId, resolvedUrl }) => {
+  const topicContent = topicSummaryArr.find(
+    (topic) => topic.id === resolvedUrl
+  );
+  const localTopicArticles = topicContent.resources;
+
+  const topicArticles = getArticleByTopic([...trimesterArticlesDb], topicId);
+
   return (
     <Layout>
-      <h1>
-        {topicId} - {trimester}
-      </h1>
-      <ArticleCard />
+      <Heading>{topicContent.title}</Heading>
+      {topicContent.content}
+      <Heading as="h2">Resources:</Heading>
+      <ArticleCard articles={topicArticles} />
     </Layout>
   );
 };

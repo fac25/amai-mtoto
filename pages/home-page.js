@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import ArticleCard from "../components/ArticleCard";
 
 // Firestore
 import {
@@ -7,26 +8,6 @@ import {
   getUserById,
   getBabySizeByWeek,
 } from "../firebase/firestore";
-
-// Swiper
-import { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// Chakra-UI
-import {
-  Card,
-  CardBody,
-  Stack,
-  Heading,
-  Text,
-  Divider,
-  Link,
-} from "@chakra-ui/react";
-
-import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 // User defined components
 import BabyProgress from "../components/BabyProgress";
@@ -36,6 +17,7 @@ import { useAuth } from "../context/AuthContext";
 import {
   whichWeekToQueryFromBabySize,
   whichTrimesterAreYouIn,
+  getArticleByTopic,
 } from "../lib/helper-functions";
 
 const TOPIC = ["exercise", "recipe", "wellbeing"];
@@ -44,7 +26,9 @@ export async function getServerSideProps({ query }) {
   const chosenTrimester = query.trimester || 1;
   const articlesByTrimester = await getArticlesByTrimester(chosenTrimester);
 
-  const articlesByTrimesterTopic = getArticleByTopic(articlesByTrimester);
+  const articlesByTrimesterTopic = TOPIC.map((topicName) =>
+    getArticleByTopic(articlesByTrimester, topicName)
+  );
 
   return {
     props: {
@@ -52,24 +36,6 @@ export async function getServerSideProps({ query }) {
       articlesByTrimesterTopic,
     },
   };
-}
-
-// get the article by topic
-function getArticleByTopic(articles) {
-  let articleByTopic = [];
-
-  for (let i = 0; i < TOPIC.length; i++) {
-    articleByTopic.push([]);
-  }
-
-  TOPIC.map((topic, index) => {
-    articles.forEach((article) => {
-      if (article.topic.includes(TOPIC[index])) {
-        articleByTopic[index].push(article);
-      }
-    });
-  });
-  return articleByTopic;
 }
 
 const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
@@ -135,49 +101,5 @@ const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
     </Layout>
   );
 };
-
-function ArticleCard({ articles }) {
-  return (
-    <>
-      <Swiper
-        slidesPerView={3}
-        // centeredSlides={true}
-        spaceBetween={30}
-        pagination={{
-          type: "fraction",
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        // loop={true}
-        className="mySwiper"
-        mt={10}
-      >
-        {articles.length > 0 &&
-          articles.map((article, index) => {
-            const { topic, trimesterRelated, title, media } = article;
-
-            return (
-              <SwiperSlide key={index}>
-                <Card maxW="sm">
-                  <Link href={media[0].src} isExternal>
-                    <CardBody>
-                      <ExternalLinkIcon mx="2px" />
-                      <Stack mt="6" spacing="3">
-                        <Heading size="md">{title}</Heading>
-                        <Divider />
-                        <Text>{`Trimester: ${trimesterRelated}`}</Text>
-                        <Divider />
-                        <Text>{`Topics: ${topic}`}</Text>
-                      </Stack>
-                    </CardBody>
-                  </Link>
-                </Card>
-              </SwiperSlide>
-            );
-          })}
-      </Swiper>
-    </>
-  );
-}
 
 export default HomePage;

@@ -47,11 +47,11 @@ function createTrimesterItems() {
       subLabel: "Find exercises tailored for you",
     },
     {
-      label: "Well being",
+      label: "Well-being",
       subLabel: "Here you'll find advice on how to feel good",
     },
     {
-      label: "Recipes",
+      label: "Nutrition",
       subLabel: "Have a look at our recipe suggestions",
     },
   ];
@@ -66,7 +66,7 @@ function createTrimesterItems() {
       label: `Trimester ${trimesterNumber}`,
       children: [
         ...TOPICS.map((topic) => {
-          const topicName = topic.label.toLowerCase().replace(" ", "-");
+          const topicName = topic.label.toLowerCase().replace("-", "");
           return {
             ...topic,
             href: `/trimester-${trimesterNumber}/${topicName}`,

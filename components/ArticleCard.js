@@ -1,18 +1,66 @@
 import React from "react";
 import Media from "./Media";
 
-const ArticleCard = () => {
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// Chakra-UI
+import {
+  Card,
+  CardBody,
+  Stack,
+  Heading,
+  Text,
+  Divider,
+  Link,
+} from "@chakra-ui/react";
+
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+
+const ArticleCard = ({ articles }) => {
   return (
-    <div>
-      <Media
-        // mediaType="video"
-        // mediaSrc="vWXrFetSH8w"
-        height="400"
-        width="600"
-        mediaType="image"
-        mediaSrc="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-      />
-    </div>
+    <>
+      <Swiper
+        slidesPerView={3}
+        // centeredSlides={true}
+        spaceBetween={30}
+        pagination={{
+          type: "fraction",
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        // loop={true}
+        className="mySwiper"
+        mt={10}
+      >
+        {articles.length > 0 &&
+          articles.map((article, index) => {
+            const { topic, trimesterRelated, title, src } = article;
+
+            return (
+              <SwiperSlide key={index}>
+                <Card maxW="sm">
+                  <Link href={src} isExternal>
+                    <CardBody>
+                      <ExternalLinkIcon mx="2px" />
+                      <Stack mt="6" spacing="3">
+                        <Heading size="md">{title}</Heading>
+                        <Divider />
+                        <Text>{`Trimester: ${trimesterRelated}`}</Text>
+                        <Divider />
+                        <Text>{`Topics: ${topic}`}</Text>
+                      </Stack>
+                    </CardBody>
+                  </Link>
+                </Card>
+              </SwiperSlide>
+            );
+          })}
+      </Swiper>
+    </>
   );
 };
 
