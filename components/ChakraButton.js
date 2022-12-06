@@ -4,7 +4,11 @@ import { Button } from "@chakra-ui/react";
 const ChakraButton = (props) => {
   return (
     <div>
-      <Button onClick={props.functionToCallWhenButtonIsClicked}>
+      <Button
+        bg="black"
+        color="gold"
+        onClick={props.functionToCallWhenButtonIsClicked}
+      >
         {props.children}
       </Button>
     </div>

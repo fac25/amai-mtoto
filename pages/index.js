@@ -6,8 +6,12 @@ import ChakraButton from "../components/ChakraButton";
 import { useRouter } from "next/router";
 import { Flex } from "@chakra-ui/react";
 
-import WomanByWall from "../public/landingPageImages/Woman-by-wall.jpg";
-import WomanLookingUp from "../public/landingPageImages/woman-looking-up.jpg";
+import BabyProgressStockPhoto from "../public/landingPageImages/BabyProgressStockPhoto.jpeg";
+import PregnancySymptomsStockPhoto from "../public/landingPageImages/PregnancySymptomsStockPhoto.jpeg";
+import EatingApple from "../public/landingPageImages/EatingApple.jpeg";
+import Exercising from "../public/landingPageImages/Exercising.jpeg";
+import Meditating from "../public/landingPageImages/Meditating.jpeg";
+import Group from "../public/landingPageImages/Group.jpeg";
 
 import carouselWriting from "../lib/data/carouselContent";
 
@@ -28,7 +32,14 @@ export async function getServerSideProps() {
 export default function Home() {
   console.log(carouselWriting);
   const router = useRouter();
-  const mediaSrcArr = [WomanByWall.src, WomanLookingUp.src];
+  const mediaSrcArr = [
+    BabyProgressStockPhoto.src,
+    PregnancySymptomsStockPhoto.src,
+    EatingApple.src,
+    Exercising.src,
+    Meditating.src,
+    Group.src,
+  ];
 
   const buttonTexts = [
     "Explore Trimester 1",
@@ -50,7 +61,7 @@ export default function Home() {
         <main>
           {/* <h1 className={styles.title}>Amai Mtoto</h1> */}
           <Carousel mediaSrcArr={mediaSrcArr} cardsHeight={"400px"} />
-          <Flex>
+          <Flex flexWrap="wrap" justifyContent="center">
             {buttonTexts.map((button, i) => {
               return (
                 <div key={i}>
