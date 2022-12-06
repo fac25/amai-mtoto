@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
       <AuthContextProvider>
         <Head>
-          <title>{`${capitalizedPath} - Amai Mtoto`}</title>
+          <title>{capitalizedPath ? capitalizedPath + '-' : ''} Amai Mtoto</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <Component {...pageProps} />
