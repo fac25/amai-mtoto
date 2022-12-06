@@ -2,12 +2,12 @@ import React from "react";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 import { Flex, Spacer } from "@chakra-ui/react";
+import layoutStyle from "../styles/Layout.module.css";
 
 import Logo from "./Logo";
-
 const Footer = () => {
   return (
-    <footer>
+    <footer className={layoutStyle.custom_footer}>
       <Flex>
         <Link as={NextLink} href="/about-us">
           About us

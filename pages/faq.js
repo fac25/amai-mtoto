@@ -31,7 +31,7 @@ export default function FaqPage({ questionsData }) {
 
   return (
     <Layout>
-      <div style={{ maxWidth: "50%" }}>
+      <div>
         <Faq data={data} styles={styles} config={config} />
       </div>
     </Layout>
