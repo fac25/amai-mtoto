@@ -34,6 +34,7 @@ export default function TrimesterTabs({ chosenTrimester, topicCards }) {
       onClick={() => {
         router.push(`/home-page?trimester=${index + 1}`);
       }}
+      className="tab"
     >
       {name}
     </Tab>
@@ -51,7 +52,7 @@ export default function TrimesterTabs({ chosenTrimester, topicCards }) {
         alignItems: "center",
       }}
     >
-      <TabList>{[...tabsLabel]}</TabList>
+      <TabList className="tab-container">{[...tabsLabel]}</TabList>
       {[...tabsContent]}
     </Tabs>
   );
