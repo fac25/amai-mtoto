@@ -8,7 +8,7 @@ import { VStack, Center } from "@chakra-ui/react";
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className={layoutStyle.layout_container}>
       <Nav />
       <Center>
         <VStack className={layoutStyle.layout_children}>{children}</VStack>
