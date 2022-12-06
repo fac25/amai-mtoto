@@ -22,6 +22,7 @@ export default function TrimesterTabs({ chosenTrimester, topicCards }) {
           key={`section-${index}`}
           topicName={topicName}
           summary={summary}
+          href={"/" + readMoreUrl}
         >
           {topicCards[index].content}
         </TopicSection>
