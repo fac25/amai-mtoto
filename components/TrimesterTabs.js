@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import TopicSection from "./TopicSection";
 import TABS_CONTENT from "../lib/data/tabsContent";
 import "react-tabs/style/react-tabs.css";
+import TabStyle from "../styles/Tab.module.css";
 
 export default function TrimesterTabs({ chosenTrimester, topicCards }) {
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function TrimesterTabs({ chosenTrimester, topicCards }) {
       onClick={() => {
         router.push(`/home-page?trimester=${index + 1}`);
       }}
-      className="tab"
+      className={TabStyle.tab}
     >
       {name}
     </Tab>
@@ -52,7 +53,7 @@ export default function TrimesterTabs({ chosenTrimester, topicCards }) {
         alignItems: "center",
       }}
     >
-      <TabList className="tab-container">{[...tabsLabel]}</TabList>
+      <TabList className={TabStyle.tab_container}>{[...tabsLabel]}</TabList>
       {[...tabsContent]}
     </Tabs>
   );
