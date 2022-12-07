@@ -25,6 +25,7 @@ import Logo from "./Logo";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ChakraButton from "./ChakraButton";
+import navStyles from "../styles/Nav.module.css";
 
 const trimesterItems = createTrimesterItems();
 const navItems = [
@@ -183,13 +184,14 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={"row"} spacing={4} alignItems="center">
+    <Stack direction={"row"} spacing={4} align={"center"}>
       {navItems.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
-                p={2}
+                className={navStyles.nav_link}
+                p={1}
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
