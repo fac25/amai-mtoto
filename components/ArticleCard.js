@@ -42,7 +42,7 @@ const ArticleCard = ({ articles }) => {
             const { topic, trimesterRelated, title, src, author } = article;
 
             return (
-              <SwiperSlide className={ArticleCardStyle.swiper_card} key={index}>
+              <SwiperSlide key={index}>
                 <Card maxW="sm">
                   <Link title={`${title} - ${author}`} href={src} isExternal>
                     <CardBody className={ArticleCardStyle.card}>

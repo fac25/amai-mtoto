@@ -1,10 +1,7 @@
-.swiper_card {
-  max-width: 20rem;
-}
-
 .card {
   border: 2px solid black;
   border-radius: 10px;
+  max-width: 20rem;
 }
 
 .card_text {
