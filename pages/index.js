@@ -64,7 +64,7 @@ export default function Home() {
             <div className={landingStyles.imageDiv}>
               <Image
                 src={Meditating}
-                alt="A black pregnat woman sitting on a yoga mat looking calm and happy"
+                alt="A black pregnant woman sitting on a yoga mat looking calm and happy"
                 width={800}
                 height={1833}
               />
