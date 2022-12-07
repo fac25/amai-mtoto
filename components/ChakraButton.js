@@ -5,6 +5,7 @@ const ChakraButton = (props) => {
   return (
     <div>
       <Button
+        m={1.5}
         bg="black"
         color="gold"
         onClick={props.functionToCallWhenButtonIsClicked}

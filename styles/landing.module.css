@@ -1,0 +1,8 @@
+@media (max-width: 1300px) {
+  .imageDiv {
+margin-top: 50px;
+margin-bottom: 30px;
+padding: 0;
+order: 0;
+  }
+}
