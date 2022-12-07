@@ -9,8 +9,8 @@ const Logo = () => {
       <Media
         // mediaType="video"
         // mediaSrc="vWXrFetSH8w"
-        height="64"
-        width="64"
+        height="100"
+        width="100"
         mediaType="image"
         mediaSrc={LogoImg.src}
       />
