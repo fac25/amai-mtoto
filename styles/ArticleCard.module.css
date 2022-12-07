@@ -1,0 +1,19 @@
+.swiper_card {
+  max-width: 20rem;
+}
+
+.card {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.card_text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.logo {
+  position: absolute;
+  right: 1rem;
+}

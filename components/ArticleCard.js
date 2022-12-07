@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 
 import { ExternalLinkIcon } from "@chakra-ui/icons";
+import ArticleCardStyle from "../styles/ArticleCard.module.css";
 
 const ArticleCard = ({ articles }) => {
   return (
@@ -41,15 +42,25 @@ const ArticleCard = ({ articles }) => {
             const { topic, trimesterRelated, title, src, author } = article;
 
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide className={ArticleCardStyle.swiper_card} key={index}>
                 <Card maxW="sm">
-                  <Link href={src} isExternal>
-                    <CardBody>
-                      <ExternalLinkIcon mx="2px" />
+                  <Link title={`${title} - ${author}`} href={src} isExternal>
+                    <CardBody className={ArticleCardStyle.card}>
+                      <ExternalLinkIcon
+                        mx="2px"
+                        className={ArticleCardStyle.logo}
+                      />
                       <Stack mt="6" spacing="3">
-                        <Heading size="md">{title}</Heading>
+                        <Heading
+                          className={ArticleCardStyle.card_text}
+                          size="md"
+                        >
+                          {title}
+                        </Heading>
                         <Divider />
-                        <Text>{author || "Unknown Author"}</Text>
+                        <Text className={ArticleCardStyle.card_text}>
+                          {author || "Unknown Author"}
+                        </Text>
                       </Stack>
                     </CardBody>
                   </Link>
