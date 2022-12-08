@@ -83,4 +83,7 @@ iframe {
   .swiper-slide {
     min-width: 10rem;
   }
+
+.faq-row, .faq-title {
+  border-bottom: none !important;
 }
