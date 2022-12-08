@@ -8,34 +8,27 @@ import Logo from "./Logo";
 const Footer = () => {
   return (
     <footer className={layoutStyle.custom_footer}>
-      <Flex>
+      <Flex
+        p={5}
+        gap={[5, 10]}
+        alignItems={"center"}
+        justifyContent={"center"}
+        flexDirection={["column", "row"]}
+      >
+        <Logo isFooter={true} />
         <Link as={NextLink} href="/about-us">
           About us
         </Link>
-        <Spacer />
         <Link as={NextLink} href="/contact-us">
           Contact us
         </Link>
-        <Spacer />
-        <Link as={NextLink} href="/glossary">
-          Glossary
-        </Link>
-        <Spacer />
-        <Link as={NextLink} href="/developers">
-          Developers
-        </Link>
-        <Spacer />
         <Link as={NextLink} href="https://amai-mtoto.forumotion.com/">
           Forum
         </Link>
-        <Spacer />
         <Link as={NextLink} href="/disclaimer">
           Disclaimer
         </Link>
-        <Spacer />
         <p>&copy;</p>
-        <Spacer />
-        <Logo />
       </Flex>
     </footer>
   );

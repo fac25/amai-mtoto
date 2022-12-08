@@ -1,20 +1,44 @@
 import React from "react";
 import Media from "./Media";
-import LogoImg from "../public/amai-mtoto.png";
-import { Heading } from "@chakra-ui/react";
+import LogoImg from "../public/logoImage.png";
+import LogoTitle from "../public/logoTitle.png";
+import { Flex } from "@chakra-ui/react";
 
-const Logo = () => {
+const Logo = ({ isFooter = false }) => {
+  const logoSettings = isFooter
+    ? {
+        // Footer
+        imageHeight: "32",
+        imageWidth: "32",
+        titleHeight: "44",
+        titleWidth: "100",
+        imageSrc: LogoImg,
+        titleSrc: LogoTitle,
+      }
+    : {
+        imageHeight: "40",
+        imageWidth: "40",
+        titleHeight: "44",
+        titleWidth: "100",
+        imageSrc: LogoImg,
+        titleSrc: LogoTitle,
+      };
   return (
-    <div>
+    <Flex className={isFooter && "footer_logo"}>
       <Media
-        // mediaType="video"
-        // mediaSrc="vWXrFetSH8w"
-        height="100"
-        width="100"
+        height={logoSettings.imageHeight}
+        width={logoSettings.imageWidth}
         mediaType="image"
-        mediaSrc={LogoImg.src}
+        mediaSrc={logoSettings.imageSrc.src}
       />
-    </div>
+      <Media
+        className="logo_text"
+        height={logoSettings.titleHeight}
+        width={logoSettings.titleWidth}
+        mediaType="image"
+        mediaSrc={logoSettings.titleSrc.src}
+      />
+    </Flex>
   );
 };
 
