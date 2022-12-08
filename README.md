@@ -5,6 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+npm ci
 npm run dev
 # or
 yarn dev
@@ -37,7 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 # Project documentation
 
 
-## Introduction - Sumithra
+## Introduction
 
 ### What are you building?
 An app for Afro-Carribbean pregnant women to get support for their mental and physical wellbeing.
@@ -46,7 +47,7 @@ An app for Afro-Carribbean pregnant women to get support for their mental and ph
 To fill a gap in the market since there does not currently exist (as far as we know) an app that integrates all the above functionality in one place.
 
 
-## Project scope - Patrick
+## Project scope
 ### What are you not building?
 - We are not building a website tailored to all women
 - A platform which provides full health support for our users
@@ -58,12 +59,12 @@ To fill a gap in the market since there does not currently exist (as far as we k
 A quantitive approach was used, based on the usability tests we did with our user pool.
 We also considered the quantity of users affected by the feature when prioritizing features.
 
-## Project plan - Yassien
+## Project plan
 ### How are you going to structure your sprints?
 ### What order are you going to build in?
 ### How did user research inform your plan?
 
-## Requirement analysis - Alex
+## Requirement analysis
 ### How will you ensure your project is accessible to as many users as possible?
 
 A Chrome extention called WAVE to assit with page accessibility. Also lighthouse tests as well as referencing the A11y checklist. 
