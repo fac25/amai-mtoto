@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
@@ -13,8 +14,13 @@ import {
   Flex,
   Container,
 } from "@chakra-ui/react";
-import { convertDateInputToMillisecondsFormat } from "../lib/helper-functions";
+import {
+  convertDateInputToMillisecondsFormat,
+  convertMillisecondsToDateStringFormat,
+  dateInFourtyOneWeeksTime,
+} from "../lib/helper-functions";
 import JustForNonLoggedInUsers from "../components/JustForNonLoggedInUsers";
+import ErrorAlert from "../components/ErrorAlert";
 
 const Signup = () => {
   const {
@@ -22,6 +28,9 @@ const Signup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [firebaseAuthErrorMsg, setFirebaseAuthErrorMsg] = useState();
+  const [errorIsVisible, setErrorIsVisible] = useState(false);
 
   const { signUp } = useAuth();
   const router = useRouter();
@@ -38,8 +47,24 @@ const Signup = () => {
         router.push(`/home-page?trimester=1`);
       });
     } catch (error) {
+      if (error.message === "Firebase: Error (auth/invalid-email).") {
+        setFirebaseAuthErrorMsg("Please enter a valid email");
+      } else if (
+        error.message === "Firebase: Error (auth/email-already-in-use)."
+      ) {
+        setFirebaseAuthErrorMsg(
+          "This email has already been registered, please log in"
+        );
+      } else if (
+        error.message ===
+        "Firebase: Password should be at least 6 characters (auth/weak-password)."
+      ) {
+        setFirebaseAuthErrorMsg("Password must be at least 6 characters");
+      } else {
+        setFirebaseAuthErrorMsg(error.message);
+      }
+      setErrorIsVisible(true);
       console.log(error.message);
-      // alert(error.message);
     }
   };
   return (
@@ -73,7 +98,9 @@ const Signup = () => {
                     size="lg"
                     {...register("name", { required: "Name is required" })}
                   />
-                  {errors.name && <p>{errors.name.message}</p>}
+                  {errors.name && (
+                    <ErrorAlert title={errors.name.message}></ErrorAlert>
+                  )}
                 </FormControl>
 
                 <FormControl
@@ -90,9 +117,21 @@ const Signup = () => {
                     size="lg"
                     {...register("dueDate", {
                       required: "Due date is required",
+                      min: `${convertMillisecondsToDateStringFormat(
+                        new Date().getTime()
+                      )}`,
+                      max: `${dateInFourtyOneWeeksTime()}`,
                     })}
                   />
-                  {errors.dueDate && <p>{errors.dueDate.message}</p>}
+                  {errors.dueDate && (
+                    <ErrorAlert title={errors.dueDate.message}></ErrorAlert>
+                  )}
+                  {errors.dueDate && errors.dueDate.type === "min" && (
+                    <ErrorAlert title="Due date cannot be in the past"></ErrorAlert>
+                  )}
+                  {errors.dueDate && errors.dueDate.type === "max" && (
+                    <ErrorAlert title="Due date too far in the future"></ErrorAlert>
+                  )}
                 </FormControl>
 
                 <FormControl
@@ -109,7 +148,9 @@ const Signup = () => {
                     size="lg"
                     {...register("email", { required: "Email is required" })}
                   />
-                  {errors.email && <p>{errors.email.message}</p>}
+                  {errors.email && (
+                    <ErrorAlert title={errors.email.message}></ErrorAlert>
+                  )}
                 </FormControl>
                 <FormControl
                   display="flex"
@@ -128,8 +169,13 @@ const Signup = () => {
                       required: "Password is required",
                     })}
                   />
-                  {errors.password && <p>{errors.password.message}</p>}
+                  {errors.password && (
+                    <ErrorAlert title={errors.password.message}></ErrorAlert>
+                  )}
                 </FormControl>
+                {errorIsVisible ? (
+                  <ErrorAlert title={firebaseAuthErrorMsg}></ErrorAlert>
+                ) : null}
                 <Button type="submit" minW={{ base: "full", md: "48" }}>
                   Submit
                 </Button>

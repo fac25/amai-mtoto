@@ -1,5 +1,5 @@
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { FormProvider, set, useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import {
@@ -14,11 +14,15 @@ import {
   Container,
 } from "@chakra-ui/react";
 import JustForNonLoggedInUsers from "../components/JustForNonLoggedInUsers";
+import { userIdOfRos } from "../components/AdminWrapper";
+import ErrorAlert from "../components/ErrorAlert";
 
 const Login = () => {
   const { logIn } = useAuth();
   const router = useRouter();
   const methods = useForm({ mode: "onBlur" });
+  const [firebaseAuthErrorMsg, setFirebaseAuthErrorMsg] = useState();
+  const [errorIsVisible, setErrorIsVisible] = useState(false);
 
   const {
     register,
@@ -31,11 +35,26 @@ const Login = () => {
       await logIn(data.email, data.password).then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        //now redirect to home page
-        router.push(`/home-page?trimester=1`);
+        if (user.uid === userIdOfRos) {
+          //if user is Ros, redirect to admin page
+          router.push(`/admin/dashboard`);
+        } else {
+          //otherwise, redirect to home page
+          router.push(`/home-page?trimester=1`);
+        }
       });
     } catch (error) {
-      // console.log(error.message);
+      if (error.message === "Firebase: Error (auth/wrong-password).") {
+        setFirebaseAuthErrorMsg("Incorrect password");
+      } else if (error.message === "Firebase: Error (auth/user-not-found).") {
+        setFirebaseAuthErrorMsg(
+          "Email has not been registered, please sign up"
+        );
+      } else {
+        setFirebaseAuthErrorMsg(error.message);
+      }
+      setErrorIsVisible(true);
+      //console.log(error.message);
     }
   };
   return (
@@ -70,7 +89,9 @@ const Login = () => {
                       {...register("email", { required: "Email is required" })}
                       size="lg"
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && (
+                      <ErrorAlert title={errors.email.message}></ErrorAlert>
+                    )}
                   </FormControl>
                   <FormControl
                     display="flex"
@@ -88,9 +109,13 @@ const Login = () => {
                       })}
                       size="lg"
                     />
-                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.password && (
+                      <ErrorAlert title={errors.password.message}></ErrorAlert>
+                    )}
                   </FormControl>
-
+                  {errorIsVisible ? (
+                    <ErrorAlert title={firebaseAuthErrorMsg}></ErrorAlert>
+                  ) : null}
                   <div>
                     <Button type="submit" minWidth={{ base: "full", md: "48" }}>
                       submit

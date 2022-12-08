@@ -20,6 +20,8 @@ import {
   getArticleByTopic,
 } from "../lib/helper-functions";
 
+import { userIdOfRos } from "../components/AdminWrapper";
+
 const TOPIC = ["exercise", "nutrition", "wellbeing"];
 
 export async function getServerSideProps({ query }) {
@@ -46,7 +48,7 @@ const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+    if (user && user.uid != userIdOfRos) {
       //- [x] for this user, get their username and due date from the db
       //console.log(user);
       getUserById(user.uid).then((userFromDb) => {
@@ -85,14 +87,14 @@ const HomePage = ({ chosenTrimester, articlesByTrimesterTopic }) => {
 
   return (
     <Layout>
-      {!user ? null : (
+      {user && user.uid != userIdOfRos ? (
         <BabyProgress
           mediaSrc={babySizeObj.imgSrc}
           username={name}
           weekNum={weekNum}
           sizeDescriptor={babySizeObj.description}
         />
-      )}
+      ) : null}
 
       <TrimesterTabs
         chosenTrimester={chosenTrimester}
