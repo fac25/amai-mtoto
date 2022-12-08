@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { capitalizeFirstLetter } from "../lib/helper-functions";
 
-
 const colors = {
   brand: {
     900: "#1a365d",
@@ -18,16 +17,26 @@ const colors = {
 
 const theme = extendTheme({ colors });
 function MyApp({ Component, pageProps }) {
-  const router = useRouter()
-  const pathArr = router.pathname.replaceAll('/', '').split(/[\s-]/g)
-  const capitalizedPath = pathArr.map(capitalizeFirstLetter).join(' ')
+  const router = useRouter();
+  const pathArr = router.asPath
+    .replaceAll("/", "")
+    .replaceAll("?", ": ")
+    .replaceAll("=", " ")
+    .split(/[\s-]/g);
+  const capitalizedPath = pathArr.map(capitalizeFirstLetter).join(" ");
+  //console.log(capitalizedPath);
 
   return (
     <ChakraProvider theme={theme}>
       <AuthContextProvider>
         <Head>
-          <title>{capitalizedPath ? capitalizedPath + '-' : ''} Amai Mtoto</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <title>
+            {capitalizedPath ? capitalizedPath + " -" : ""} Amai Mtoto
+          </title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
         </Head>
         <Component {...pageProps} />
       </AuthContextProvider>
@@ -35,4 +44,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;
