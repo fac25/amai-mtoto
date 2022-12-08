@@ -40,7 +40,7 @@ const ArticleCard = ({ articles }) => {
         {articles.length > 0 &&
           articles.map((article, index) => {
             const { topic, trimesterRelated, title, src, author } = article;
-            console.log(article);
+         
             return (
               <SwiperSlide key={index}>
                 <Card maxW="sm">
