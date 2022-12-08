@@ -39,6 +39,7 @@ a {
 }
 
 .swiper-slide {
+  margin-top: 1rem;
   min-width: 20rem;
 }
 
@@ -116,4 +117,16 @@ iframe {
   .footer_logo.css-k008qs {
     display: none;
   }
+}
+
+.tab_panel {
+  max-width: 70vw; 
+}
+
+.chakra-heading { 
+  padding: 1rem 0
+}
+
+.read-more {
+  text-decoration:underline !important;
 }
