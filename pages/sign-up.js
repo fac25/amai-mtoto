@@ -123,9 +123,7 @@ const Signup = () => {
                       max: `${dateInFourtyOneWeeksTime()}`,
                     })}
                   />
-                  {errors.dueDate && (
-                    <ErrorAlert title={errors.dueDate.message}></ErrorAlert>
-                  )}
+                  
                   {errors.dueDate && errors.dueDate.type === "min" && (
                     <ErrorAlert title="Due date cannot be in the past"></ErrorAlert>
                   )}
