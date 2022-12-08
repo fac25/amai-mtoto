@@ -38,9 +38,12 @@ a {
   border-radius: 10px;
 }
 
+.mySwiper{
+  max-width: 100%;
+}
 .swiper-slide {
   margin-top: 1rem;
-  min-width: calc(33% - 20px);
+  min-width: calc(33% - 20px) !important;
 }
 
 .swiper-wrapper {

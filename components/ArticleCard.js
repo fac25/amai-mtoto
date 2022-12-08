@@ -1,5 +1,4 @@
 import React from "react";
-import Media from "./Media";
 
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
