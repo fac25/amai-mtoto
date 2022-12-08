@@ -38,12 +38,16 @@ a {
   border-radius: 10px;
 }
 
+.mySwiper{
+  max-width: 100%;
+}
 .swiper-slide {
-  min-width: 20rem;
+  margin-top: 1rem;
+  min-width: calc(33% - 20px) !important;
 }
 
 .swiper-wrapper {
-  max-width: 95vw;
+  max-width: 100%;
 }
 
 .swiper-pagination {
@@ -119,4 +123,16 @@ iframe {
   .footer_logo.css-k008qs {
     display: none;
   }
+}
+
+.tab_panel {
+  max-width: 70vw; 
+}
+
+.chakra-heading { 
+  padding: 1rem 0
+}
+
+.read-more {
+  text-decoration:underline !important;
 }

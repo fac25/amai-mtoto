@@ -42,7 +42,9 @@ export default function TrimesterTabs({ chosenTrimester, topicCards }) {
     </Tab>
   ));
   const tabsContent = tabs.map(({ content }, index) => (
-    <TabPanel key={`tab-content-${index}`}>{content}</TabPanel>
+    <TabPanel className="tab_panel" key={`tab-content-${index}`}>
+      {content}
+    </TabPanel>
   ));
   return (
     <Tabs

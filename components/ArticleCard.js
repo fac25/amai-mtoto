@@ -1,5 +1,4 @@
 import React from "react";
-import Media from "./Media";
 
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -27,7 +26,7 @@ const ArticleCard = ({ articles }) => {
       <Swiper
         slidesPerView={3}
         // centeredSlides={true}
-        spaceBetween={30}
+        spaceBetween={10}
         pagination={{
           type: "fraction",
         }}
@@ -40,7 +39,7 @@ const ArticleCard = ({ articles }) => {
         {articles.length > 0 &&
           articles.map((article, index) => {
             const { topic, trimesterRelated, title, src, author } = article;
-         
+
             return (
               <SwiperSlide key={index}>
                 <Card maxW="sm">

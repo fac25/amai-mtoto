@@ -6,7 +6,9 @@ function TopicSection({ topicName, summary, children, href }) {
     <div>
       <Heading>{topicName}</Heading>
       <Text>{summary}</Text>
-      <Link href={href}>Read more</Link>
+      <Link className="read-more" href={href}>
+        Read more
+      </Link>
       <div style={{ maxWidth: "100vw" }}>{children}</div>
     </div>
   );
