@@ -98,16 +98,19 @@ iframe {
 }
 
 
+.chakra-link {
+  white-space: nowrap;
+}
+
+.sign-in {
+  margin-left: 1rem;
+}
 
 
-@media only screen and (max-width: 905px) {
-  .chakra-stack.css-a9v878{
-    display: none;
+@media only screen and (min-width: 768px) and (max-width:905px) {
+  .logo {
+    display: none !important;
   }
-  .css-1twb9xo {
-    display: flex !important;
-  }
-
 }
 
 @media only screen and (max-width:500px) {

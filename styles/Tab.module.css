@@ -2,10 +2,10 @@
   display: flex;
   gap: 5rem;
   color: var(--text-color);
-  background-color: var(--color2);
   border-radius: 5px;
   margin-top: 1rem;
   color: var(--text-color);
+  padding: 1rem;
 }
 
 .tab {
@@ -13,6 +13,12 @@
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: 600;
+  list-style: none;
+  border-radius: 10px;
+}
+
+.tab::before {
+  display: none;
 }
 
 .tab_container > li[aria-selected="true"] {
@@ -22,20 +28,27 @@
   border-radius: 10px;
 }
 
-@media only screen and (max-width: 600px) {
-  .tab-container {
-    gap: 2.5rem;
-  }
+@media only screen and (max-width: 700px) {
   .tab {
     font-size: 1rem;
   }
 }
 
-@media only screen and (max-width: 370px) {
-  .tab-container {
-    gap: 1rem;
+@media only screen and (max-width: 520px) {
+  .tab_container {
+    gap: 3rem;
   }
   .tab {
     font-size: 0.8rem;
+    flex-wrap: nowrap;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .tab_container {
+    gap: 2rem;
+  }
+  .tab {
+    font-size: 0.6rem;
   }
 }

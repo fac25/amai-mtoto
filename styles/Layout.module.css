@@ -1,6 +1,6 @@
 .layout_children {
     max-width: 70vw;
-    min-height: calc(100vh - 64px - 90px);
+    min-height: calc(100vh - 220px);
 }
 
 .layout_children .imgDiv{

@@ -143,6 +143,7 @@ export default function Nav() {
               spacing={6}
             >
               <Button
+                className="sign-in"
                 as={"a"}
                 fontSize={"sm"}
                 fontWeight={400}

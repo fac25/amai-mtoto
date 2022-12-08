@@ -26,7 +26,7 @@ const Logo = ({ isFooter = false }) => {
       };
   return (
     <Link as={NextLink} href="/home-page">
-      <Flex className={isFooter && "footer_logo"}>
+      <Flex className={isFooter ? "footer_logo" : "logo"}>
         <Media
           height={logoSettings.imageHeight}
           width={logoSettings.imageWidth}
