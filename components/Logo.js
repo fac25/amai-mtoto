@@ -2,7 +2,8 @@ import React from "react";
 import Media from "./Media";
 import LogoImg from "../public/logoImage.png";
 import LogoTitle from "../public/logoTitle.png";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 const Logo = ({ isFooter = false }) => {
   const logoSettings = isFooter
@@ -24,21 +25,23 @@ const Logo = ({ isFooter = false }) => {
         titleSrc: LogoTitle,
       };
   return (
-    <Flex className={isFooter && "footer_logo"}>
-      <Media
-        height={logoSettings.imageHeight}
-        width={logoSettings.imageWidth}
-        mediaType="image"
-        mediaSrc={logoSettings.imageSrc.src}
-      />
-      <Media
-        className="logo_text"
-        height={logoSettings.titleHeight}
-        width={logoSettings.titleWidth}
-        mediaType="image"
-        mediaSrc={logoSettings.titleSrc.src}
-      />
-    </Flex>
+    <Link as={NextLink} href="/home-page">
+      <Flex className={isFooter && "footer_logo"}>
+        <Media
+          height={logoSettings.imageHeight}
+          width={logoSettings.imageWidth}
+          mediaType="image"
+          mediaSrc={logoSettings.imageSrc.src}
+        />
+        <Media
+          className="logo_text"
+          height={logoSettings.titleHeight}
+          width={logoSettings.titleWidth}
+          mediaType="image"
+          mediaSrc={logoSettings.titleSrc.src}
+        />
+      </Flex>
+    </Link>
   );
 };
 
