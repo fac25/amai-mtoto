@@ -24,7 +24,7 @@ const Logo = ({ isFooter = false }) => {
         titleSrc: LogoTitle,
       };
   return (
-    <Flex className={isFooter && "footer_logo"}>
+    <Flex className={isFooter ? "footer_logo" : "logo"}>
       <Media
         height={logoSettings.imageHeight}
         width={logoSettings.imageWidth}
