@@ -1,11 +1,11 @@
 import React from "react";
 import Video from "./Video";
 
-const Media = ({ mediaType, mediaSrc, height, width }) => {
+const Media = ({ mediaType, mediaSrc, height, width, className }) => {
   return mediaType === "video" ? (
     <Video mediaSrc={mediaSrc} height={height} width={width} />
   ) : (
-    <img src={mediaSrc} height={height} width={width} />
+    <img className={className} src={mediaSrc} height={height} width={width} />
   );
 };
 

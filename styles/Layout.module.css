@@ -1,6 +1,6 @@
 .layout_children {
     max-width: 70vw;
-    min-height: calc(100vh - 124px - 110px);
+    min-height: calc(100vh - 64px - 90px);
 }
 
 .layout_children .imgDiv{
@@ -12,19 +12,20 @@
 } 
  
 .custom_footer {
-    bottom: 0;
+    background-color: white;
+    margin-top: 2rem;
 }
-
+.Nav_nav_link__2Hh0v.css-1xkeamy {
+    padding-bottom: 20 !important;
+}
 @media(max-width: 1100px) {
     .layout_children {
         max-width: 90vw;
-        min-height: calc(100vh - 124px - 110px);
     }
 }
 
 @media(max-width: 420px) {
     .layout_children {
         max-width: 95vw;
-        min-height: calc(100vh - 124px - 110px);
     }
 }

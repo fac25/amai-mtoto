@@ -36,3 +36,33 @@ a {
 .faq-row, .faq-title {
   border-bottom: none !important;
 }
+
+
+.chakra-button.css-8ca0hc {
+  display: block;
+}
+
+
+
+
+@media only screen and (max-width: 905px) {
+  .chakra-stack.css-a9v878{
+    display: none;
+  }
+  .css-1twb9xo {
+    display: flex !important;
+  }
+
+}
+
+@media only screen and (max-width:500px) {
+  .logo_text {
+    display: none;
+  }
+}
+
+@media only screen and (max-width:650px) {
+  .footer_logo.css-k008qs {
+    display: none;
+  }
+}

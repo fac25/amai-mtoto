@@ -37,7 +37,7 @@ export default function Home() {
     <Layout>
       <div className={styles.container}>
         <main>
-          <Flex flexDirection={["column-reverse", "row"]}>
+          <Flex flexDirection={["column-reverse", "row"]} py={20}>
             <Flex flexWrap="wrap" justifyContent="center">
               <VStack mr={30}>
                 <Heading

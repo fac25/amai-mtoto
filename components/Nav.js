@@ -25,7 +25,6 @@ import Logo from "./Logo";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ChakraButton from "./ChakraButton";
-import navStyles from "../styles/Nav.module.css";
 
 const trimesterItems = createTrimesterItems();
 const navItems = [
@@ -190,7 +189,6 @@ const DesktopNav = () => {
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
-                className={navStyles.nav_link}
                 p={1}
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
