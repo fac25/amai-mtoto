@@ -40,11 +40,11 @@ a {
 
 .swiper-slide {
   margin-top: 1rem;
-  min-width: 20rem;
+  min-width: calc(33% - 20px);
 }
 
 .swiper-wrapper {
-  max-width: 95vw;
+  max-width: 100%;
 }
 
 .swiper-pagination {
@@ -128,5 +128,5 @@ iframe {
 }
 
 .read-more {
-  text-decoration:underline !important;
+  text-decoration:underline;
 }

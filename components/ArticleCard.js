@@ -27,7 +27,7 @@ const ArticleCard = ({ articles }) => {
       <Swiper
         slidesPerView={3}
         // centeredSlides={true}
-        spaceBetween={30}
+        spaceBetween={10}
         pagination={{
           type: "fraction",
         }}
@@ -40,7 +40,7 @@ const ArticleCard = ({ articles }) => {
         {articles.length > 0 &&
           articles.map((article, index) => {
             const { topic, trimesterRelated, title, src, author } = article;
-         
+
             return (
               <SwiperSlide key={index}>
                 <Card maxW="sm">
