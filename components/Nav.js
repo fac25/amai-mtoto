@@ -30,7 +30,6 @@ const trimesterItems = createTrimesterItems();
 const navItems = [
   { label: "Home", href: "/home-page?trimester=1" },
   { label: "FAQ", href: "/faq" },
-  { label: "Search", href: "/search" },
   { label: "About Us", href: "/about-us" },
   ...trimesterItems,
 ];
