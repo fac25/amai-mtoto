@@ -31,7 +31,10 @@ function MyApp({ Component, pageProps }) {
       <AuthContextProvider>
         <Head>
           <title>
-            {capitalizedPath ? capitalizedPath + " -" : ""} Amai Mtoto
+            {capitalizedPath && capitalizedPath != " "
+              ? capitalizedPath + " -"
+              : ""}{" "}
+            Amai Mtoto
           </title>
           <meta
             name="viewport"
