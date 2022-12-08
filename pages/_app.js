@@ -19,7 +19,7 @@ const theme = extendTheme({ colors });
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pathArr = router.asPath
-    .replaceAll("/", "")
+    .replaceAll("/", " ")
     .replaceAll("?", ": ")
     .replaceAll("=", " ")
     .split(/[\s-]/g);
