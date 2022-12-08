@@ -1,0 +1,20 @@
+.chakra-card {
+  border: 2px solid black;
+  border-radius: 10px;
+  min-width: 10rem;
+}
+
+.card {
+  max-width: 20rem;
+}
+
+.card_text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.logo {
+  position: absolute;
+  right: 1rem;
+}

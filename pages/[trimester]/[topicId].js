@@ -5,6 +5,8 @@ import topicSummaryArr from "../../lib/data/topicSummary";
 import { getArticleByTopic } from "../../lib/helper-functions.js";
 import { getArticlesByTrimester } from "../../firebase/firestore";
 import { Heading } from "@chakra-ui/react";
+import TopicPages from "../../styles/TopicPages.module.css";
+
 export async function getServerSideProps({ params, resolvedUrl }) {
   const topicId = params.topicId;
   const trimester = params.trimester.slice(params.trimester.length - 1);
@@ -31,9 +33,11 @@ const Topic = ({ trimesterArticlesDb, topicId, resolvedUrl }) => {
 
   return (
     <Layout>
-      <Heading>{topicContent.title}</Heading>
+      <Heading className={TopicPages.heading}>{topicContent.title}</Heading>
       {topicContent.content}
-      <Heading as="h2">Resources:</Heading>
+      <Heading className={TopicPages.resource} as="h2">
+        Resources:
+      </Heading>
       <ArticleCard articles={topicArticles} />
     </Layout>
   );
