@@ -1,6 +1,10 @@
-.card {
+.chakra-card {
   border: 2px solid black;
   border-radius: 10px;
+  min-width: 10rem;
+}
+
+.card {
   max-width: 20rem;
 }
 
