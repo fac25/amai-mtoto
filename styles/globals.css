@@ -35,7 +35,7 @@ a {
 
 .chakra-card {
   border: 2px solid black;
-  border-radius: 10px;
+  min-width: 10rem;
 }
 
 .mySwiper{
@@ -98,7 +98,7 @@ iframe {
 }
 
 
-.chakra-link {
+.nav.chakra-link {
   white-space: nowrap;
 }
 
