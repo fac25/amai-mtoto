@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #f7f5f2;
+  --primary-color: #FBF2EE;
   --secondary-color: #db5461;
   --text-color: #3c3c3c;
   --color1: #ad4903;
@@ -135,4 +135,12 @@ iframe {
 
 .read-more {
   text-decoration:underline !important;
+}
+
+.disclaimer_style{
+  background-color: #FEEBC8 !important;
+}
+
+.chakra-alert__icon {
+  background-color: #FEEBC8 !important;
 }
